@@ -5,65 +5,90 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/23 16:55:25 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/23 17:03:48 by maximemarti      ###   ########.fr       */
+/*   Created: 2025/06/23 17:23:26 by maximemarti       #+#    #+#             */
+/*   Updated: 2025/06/23 17:24:56 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube3d.h"
 
-static void	assign_north_south(char *line, t_map_data *data, int *found)
+int	is_data_complete(t_map_data *data)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0 && !data->textures.no)
-	{
-		data->textures.no = ft_strdup(line + 3);
-		(*found)++;
-	}
-	else if (ft_strncmp(line, "SO ", 3) == 0 && !data->textures.so)
-	{
-		data->textures.so = ft_strdup(line + 3);
-		(*found)++;
-	}
+	return (
+		data->textures.no && data->textures.so && \
+		data->textures.we && data->textures.ea && \
+		data->colors.floor && data->colors.ceiling && \
+		data->map && data->map[0]
+	);
 }
 
-static void	assign_west_east(char *line, t_map_data *data, int *found)
+int	copy_map(char **lines, t_map_data *data, int start)
 {
-	if (ft_strncmp(line, "WE ", 3) == 0 && !data->textures.we)
+	int	count;
+	int	j;
+
+	count = 0;
+	j = 0;
+	while (lines[start + count])
+		count++;
+	data->map = malloc(sizeof(char *) * (count + 1));
+	if (!data->map)
+		return (0);
+	while (j < count)
 	{
-		data->textures.we = ft_strdup(line + 3);
-		(*found)++;
+		data->map[j] = ft_strdup(lines[start + j]);
+		if (!data->map[j])
+			return (0);
+		j++;
 	}
-	else if (ft_strncmp(line, "EA ", 3) == 0 && !data->textures.ea)
-	{
-		data->textures.ea = ft_strdup(line + 3);
-		(*found)++;
-	}
+	data->map[j] = NULL;
+	return (1);
 }
 
-static void	assign_floor_ceiling(char *line, t_map_data *data, int *found)
+int	split_sections(char **lines, t_map_data *data)
 {
-	if (ft_strncmp(line, "F ", 2) == 0 && !data->colors.floor)
-	{
-		data->colors.floor = ft_strdup(line + 2);
-		(*found)++;
-	}
-	else if (ft_strncmp(line, "C ", 2) == 0 && !data->colors.ceiling)
-	{
-		data->colors.ceiling = ft_strdup(line + 2);
-		(*found)++;
-	}
-}
+	int	i;
+	int	found;
+	int	map_start;
 
-void	assign_texture_or_color(char *line, t_map_data *data, int *found)
-{
-	assign_north_south(line, data, found);
-	assign_west_east(line, data, found);
-	assign_floor_ceiling(line, data, found);
-}
-
-int	find_map_start(char **lines, int i)
-{
-	while (lines[i] && ft_strlen(lines[i]) == 1)
+	i = 0;
+	found = 0;
+	while (lines[i] && found < 6)
+	{
+		assign_texture_or_color(lines[i], data, &found);
 		i++;
-	return (i);
+	}
+	map_start = find_map_start(lines, i);
+	if (!copy_map(lines, data, map_start))
+		return (0);
+	if (!is_data_complete(data))
+		return (0);
+	return (1);
+}
+
+char	**open_map(char *map)
+{
+	int		fd;
+	char	**line;
+	char	*current;
+	int		i;
+
+	if (!map)
+		return (NULL);
+	fd = open(map, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	line = malloc((sizeof(char *) * 256));
+	if (!line)
+		return (NULL);
+	current = get_next_line(fd);
+	i = 0;
+	while (current && i < 256)
+	{
+		line[i++] = current;
+		current = get_next_line(fd);
+	}
+	line[i] = NULL;
+	close(fd);
+	return (line);
 }

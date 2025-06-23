@@ -6,7 +6,7 @@
 #    By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/23 14:54:30 by maximemarti       #+#    #+#              #
-#    Updated: 2025/06/23 17:07:47 by maximemarti      ###   ########.fr        #
+#    Updated: 2025/06/23 17:24:14 by maximemarti      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME        = cube3d
 
 SRC         = src/main.c \
 				src/split_map.c \
+				src/assign_map.c \
 				src/free.c \
               # ajoute ici les autres fichiers .c de ton projet
 
