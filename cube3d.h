@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:32:34 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/23 17:07:57 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/23 18:30:51 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,18 @@ typedef struct s_color {
 	char *ceiling;
 }	t_color;
 
+typedef struct s_colors_int
+{
+	int	floor;
+	int	ceiling;
+	int	floor_set;
+	int	ceiling_set;
+}	t_colors_int;
+
 typedef struct s_map_data {
 	t_texture textures;
-	t_color colors;
+	//t_color colors;
+	t_colors_int colors_int;
 	char **map;
 }	t_map_data;
 
