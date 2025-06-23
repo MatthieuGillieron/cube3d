@@ -6,7 +6,7 @@
 #    By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/23 14:54:30 by maximemarti       #+#    #+#              #
-#    Updated: 2025/06/23 17:24:14 by maximemarti      ###   ########.fr        #
+#    Updated: 2025/06/23 17:28:01 by maximemarti      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC         = src/main.c \
 				src/split_map.c \
 				src/assign_map.c \
 				src/free.c \
+				src/is_map_ok.c \
               # ajoute ici les autres fichiers .c de ton projet
 
 OBJ         = $(SRC:.c=.o)

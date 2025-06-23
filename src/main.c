@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/23 17:23:43 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/23 17:56:33 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int ac, char **av)
 {
 	char		**lines;
 	t_map_data	map = {0};
+	t_player	player;
 
 	if (ac != 2)
 		return (1);
@@ -27,12 +28,8 @@ int	main(int ac, char **av)
 		free(lines);
 		return (1);
 	}
-	printf("NO: %s", map.textures.no);
-	printf("SO: %s", map.textures.so);
-	printf("WE: %s", map.textures.we);
-	printf("EA: %s", map.textures.ea);
-	printf("F: %s", map.colors.floor);
-	printf("C: %s", map.colors.ceiling);
-	for (int i = 0; map.map[i]; i++)
-		printf("MAP: %s", map.map[i]);
+	if (!is_map_enclosed(map.map, &player))
+		printf("Map not good\n");
+	else
+		printf("Player position: x=%d, y=%d, direction=%c\n", player.x, player.y, player.direction);
 }
