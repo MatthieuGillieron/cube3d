@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/23 19:00:08 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 00:19:48 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include <stdio.h> 
+# include "../mlx/mlx.h"
 
 typedef struct s_texture {
 	char	*no;
@@ -28,22 +29,9 @@ typedef struct s_texture {
 typedef struct s_color {
 	char	*floor;
 	char	*ceiling;
+	int		set_flor;
+	int		set_ceiling;
 }	t_color;
-
-typedef struct s_colors_int
-{
-	int	floor;
-	int	ceiling;
-	int	floor_set;
-	int	ceiling_set;
-}	t_colors_int;
-
-typedef struct s_map_data {
-	t_texture textures;
-	t_color colors;
-	t_colors_int colors_int;
-	char **map;
-}	t_map_data;
 
 typedef struct s_player
 {
@@ -51,6 +39,14 @@ typedef struct s_player
 	int		y;
 	char	direction;
 }	t_player;
+
+typedef struct s_map_data {
+	t_texture textures;
+	t_color colors;
+	t_player player;
+	char **map;
+}	t_map_data;
+
 
 //--------------split_map.c-----------------------
 char	**open_map(char *map);
@@ -62,5 +58,5 @@ int		assign_texture_or_color(char *line, t_map_data *data, int *found);
 void	free_map_data(t_map_data *data);
 //--------------is_map_ok.c--------------------
 int		is_map_enclosed(char **map, t_player *player);
-
+int		parse_color(t_map_data *data, int is_floor);
 #endif
