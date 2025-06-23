@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 00:16:14 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 00:24:30 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,11 @@ void	print_color(t_color *col)
 	printf("Colors:\n");
 	printf("  Floor: %s\n", col->floor);
 	printf("  Ceiling: %s\n", col->ceiling);
+	printf("  Floor: %d\n", col->set_flor);
+	printf("  Ceiling: %d\n", col->set_ceiling);
 }
 
-void	print_colors_int(t_colors_int *ci)
-{
-	printf("Colors (int):\n");
-	printf("  Floor: %d\n", ci->floor);
-	printf("  Ceiling: %d\n", ci->ceiling);
-	printf("  Floor set: %d\n", ci->floor_set);
-	printf("  Ceiling set: %d\n", ci->ceiling_set);
-}
+
 
 void	print_map(char **map)
 {
@@ -56,7 +51,6 @@ void	print_map_data(t_map_data *data)
 	printf("=== Map Data ===\n");
 	print_texture(&data->textures);
 	print_color(&data->colors);
-	print_colors_int(&data->colors_int);
 	print_map(data->map);
 }
 
@@ -150,7 +144,7 @@ int	check_file(char **files, t_map_data	map)
 		free(files);
 		return (1);
 	}*/
-	parse_color(&map, 1);
+	//parse_color(&map, 1);
 	print_map_data(&map);
 	print_player(&map.player);
 	return (0);
