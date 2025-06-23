@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/23 15:15:59 by maximemarti      ###   ########.fr       */
+/*   Created: 2024/10/02 17:00:59 by maximemarti       #+#    #+#             */
+/*   Updated: 2024/10/02 17:11:28 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int main()
+void	*ft_calloc(size_t count, size_t size)
 {
-	printf("ok\n");
+	void	*tmp;
+
+	tmp = malloc(count * size);
+	if (!tmp)
+		return (NULL);
+	ft_bzero(tmp, size * count);
+	return (tmp);
 }

@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/23 15:15:59 by maximemarti      ###   ########.fr       */
+/*   Created: 2024/10/01 16:09:04 by maximemarti       #+#    #+#             */
+/*   Updated: 2024/10/01 16:17:29 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int main()
+int	ft_toupper(int c)
 {
-	printf("ok\n");
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
 }
