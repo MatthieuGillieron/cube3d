@@ -39,12 +39,14 @@ int	parse_texture_path(char *line, t_texture *texture)
 	{
 		if (texture->so)
 			return (1);
+
 		texture->so = strdup(skip_spaces(line + 3));
 	}
 	else if (!ft_strncmp(line, "WE ", 3))
 	{
 		if (texture->we)
 			return (1);
+
 		texture->we = strdup(skip_spaces(line + 3));
 	}
 	else if (!ft_strncmp(line, "EA ", 3))
@@ -53,4 +55,14 @@ int	parse_texture_path(char *line, t_texture *texture)
 			return (1);
 		texture->ea = strdup(skip_spaces(line + 3));
 	}
+}
+
+
+static int parse_component(char **line)
+{
+	int	value;
+	
+	value = 0;
+	*line = skip_space(*line);
+	
 }
