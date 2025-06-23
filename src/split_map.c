@@ -6,11 +6,11 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 17:23:26 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/23 18:41:05 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/23 18:59:34 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube3d.h"
+#include "../includes/cube3d.h"
 
 int	check_extra_lines_after_map(char **lines, int map_start, t_map_data *data)
 {
