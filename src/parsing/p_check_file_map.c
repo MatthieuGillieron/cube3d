@@ -6,7 +6,7 @@
 /*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:42:31 by mg                #+#    #+#             */
-/*   Updated: 2025/06/23 17:04:11 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/23 17:10:15 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,32 +33,41 @@ static char	*skip_space(char *line)
 	return (line);
 }
 
-int	parse_texture_path(char *line, t_texture *cfg)
+int	parse_texture_path(char *line, t_texture *texture)
 {
 	line = skip_space(line);
 
 	if (!ft_strncmp(line, "NO ", 3))
 	{
-		if (cfg->no)
+		if (texture->no)
 			return 1;
-		cfg->no = strdup(skip_spaces(line + 3));
+		texture->no = strdup(skip_spaces(line + 3));
 	}
 	else if (!ft_strncmp(line, "SO ", 3))
 	{
-		if (cfg->so)
+		if (texture->so)
 			return 1;
-		cfg->so = strdup(skip_spaces(line + 3));
+		texture->so = strdup(skip_spaces(line + 3));
 	}
 	else if (!ft_strncmp(line, "WE ", 3))
 	{
-		if (cfg->we)
+		if (texture->we)
 			return 1;
-		cfg->we = strdup(skip_spaces(line + 3));
+		texture->we = strdup(skip_spaces(line + 3));
 	}
 	else if (!ft_strncmp(line, "EA ", 3))
 	{
-		if (cfg->ea)
+		if (texture->ea)
 			return 1;
-		cfg->ea = strdup(skip_spaces(line + 3));
+		texture->ea = strdup(skip_spaces(line + 3));
 	}
+}
+
+static int parse_component(char **line)
+{
+	int	value;
+	
+	value = 0;
+	*line = skip_space(*line);
+	
 }
