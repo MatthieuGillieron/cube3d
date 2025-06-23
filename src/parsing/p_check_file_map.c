@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   p_check_file_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:42:31 by mg                #+#    #+#             */
-/*   Updated: 2025/06/23 18:36:24 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/23 18:59:18 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include "../cube3d.h"
+#include "../includes/cube3d.h"
 
 static char	*skip_space(char *str)
 {
@@ -39,12 +36,14 @@ int	parse_texture_path(char *line, t_texture *texture)
 	{
 		if (texture->so)
 			return (1);
+
 		texture->so = strdup(skip_spaces(line + 3));
 	}
 	else if (!ft_strncmp(line, "WE ", 3))
 	{
 		if (texture->we)
 			return (1);
+
 		texture->we = strdup(skip_spaces(line + 3));
 	}
 	else if (!ft_strncmp(line, "EA ", 3))
@@ -53,4 +52,14 @@ int	parse_texture_path(char *line, t_texture *texture)
 			return (1);
 		texture->ea = strdup(skip_spaces(line + 3));
 	}
+}
+
+
+static int parse_component(char **line)
+{
+	int	value;
+	
+	value = 0;
+	*line = skip_space(*line);
+	
 }
