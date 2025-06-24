@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:44:03 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 11:14:35 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 11:35:11 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	print_color(t_color *col)
 	printf("Colors:\n");
 	printf("  Floor: %s\n", col->floor);
 	printf("  Ceiling: %s\n", col->ceiling);
-	printf("  Floor hex: 0x%X\n", col->set_floor);
-	printf("  Ceiling hex: 0x%X\n", col->set_ceiling);
+	printf("  Floor hex: %X\n", col->set_floor);
+	printf("  Ceiling hex: %X\n", col->set_ceiling);
 }
 
 void	print_map(char **map)

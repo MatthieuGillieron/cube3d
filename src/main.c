@@ -6,11 +6,51 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 11:19:45 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 11:32:49 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
+
+
+void	render_background(t_game *game)
+{
+	int		x;
+	int		y;
+	int		color;
+	char	*dst;
+
+	y = 0;
+	while (y < game->win_h)
+	{
+		x = 0;
+		while (x < game->win_w)
+		{
+			if (y < game->win_h / 2)
+				color = game->map_data.colors.set_ceiling;
+			else
+				color = game->map_data.colors.set_floor;
+			dst = game->img.addr
+				+ (y * game->img.line_len + x * (game->img.bpp / 8));
+			*(unsigned int *)dst = color;
+			x++;
+		}
+		y++;
+	}
+}
+
+int	render_loop(t_game *game)
+{
+	game->img.img = mlx_new_image(
+			game->mlx, game->win_w, game->win_h);
+	game->img.addr = mlx_get_data_addr(
+			game->img.img, &game->img.bpp,
+			&game->img.line_len, &game->img.endian);
+	render_background(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
+	mlx_destroy_image(game->mlx, game->img.img);
+	return (0);
+}
 
  int	init_game(t_game *game)
 {
@@ -37,9 +77,10 @@ int	main(int ac, char **av)
 	files = open_map(av[1]);
 	if (check_file(files, map))
 		return (1);
-	printf("ok\n");
 	if (!init_game(&game))
 		return (1);
+	mlx_loop_hook(game.mlx, render_loop, &game);
+
 	mlx_loop(game.mlx);
 	return (0);
 }
