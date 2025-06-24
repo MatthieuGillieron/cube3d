@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assign_map.c                                       :+:      :+:    :+:   */
+/*   p_assign_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:55:25 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/23 18:59:09 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 08:35:42 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
+#include "../../includes/cube3d.h"
 
 static	int	assign_north_south(char *line, t_map_data *data, int *found)
 {

@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 00:19:48 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 08:45:17 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,29 @@ typedef struct s_map_data {
 	char **map;
 }	t_map_data;
 
-
-//--------------split_map.c-----------------------
+//--------------parsing----------------
+//--------------p_split_map.c-----------------------
 char	**open_map(char *map);
 int		split_sections(char **lines, t_map_data *data);
-//--------------assign_map.c------------------------
+//------------p_split_map_utils.c----------------
+int		find_map_start(char **lines, int i);
+int		copy_map(char **lines, t_map_data *data, int start);
+int		is_data_complete(t_map_data *data);
+//--------------p_assign_map.c------------------------
 int		find_map_start(char **lines, int i);
 int		assign_texture_or_color(char *line, t_map_data *data, int *found);
-//---------------free.c------------------------
-void	free_map_data(t_map_data *data);
-//--------------is_map_ok.c--------------------
+//--------------p_map_ok.c--------------------
 int		is_map_enclosed(char **map, t_player *player);
-int		parse_color(t_map_data *data, int is_floor);
+
+//---------------utils------------------------
+//---------------u_free.c------------------------
+void	free_map_data(t_map_data *data);
+
+
+//-------------------print-helper.c----------------
+void	print_map_data(t_map_data *data);
+void	print_player(t_player *player);
+void	print_map(char **map);
+void	print_color(t_color *col);
+void	print_texture(t_texture *tex);
 #endif
