@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 11:07:06 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 11:13:02 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,25 @@ typedef struct s_map_check
 	t_player	*player;
 	int			player_count;
 }	t_map_check;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_game
+{
+	void		*mlx;
+	void		*win;
+	t_img		img;
+	int			win_w;
+	int			win_h;
+	t_map_data	map_data;
+}	t_game;
 
 //--------------parsing----------------
 //--------------p_split_map.c-----------------------
