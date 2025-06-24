@@ -94,7 +94,7 @@ int	check_file(char **files, t_map_data	map)
 		free(files);
 		return (1);
 	}*/
-	//parse_color(&map, 1);
+	parse_colors(&map);
 	print_map_data(&map);
 	print_player(&map.player);
 	return (0);

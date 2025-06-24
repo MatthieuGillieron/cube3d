@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:44:03 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 08:45:28 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 09:06:48 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cube3d.h"
+#include "../includes/cube3d.h"
 
 void	print_texture(t_texture *tex)
 {
@@ -26,8 +26,8 @@ void	print_color(t_color *col)
 	printf("Colors:\n");
 	printf("  Floor: %s\n", col->floor);
 	printf("  Ceiling: %s\n", col->ceiling);
-	printf("  Floor: %d\n", col->set_flor);
-	printf("  Ceiling: %d\n", col->set_ceiling);
+	printf("  Floor hex: 0x%X\n", col->set_floor);
+	printf("  Ceiling hex: 0x%X\n", col->set_ceiling);
 }
 
 void	print_map(char **map)

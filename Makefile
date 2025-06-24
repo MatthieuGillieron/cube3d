@@ -17,8 +17,9 @@ SRC         = src/main.c \
 				src/parsing/p_map_ok.c \
 				src/parsing/p_split_map.c \
 				src/parsing/p_split_map_utils.c \
+				src/parsing/p_color.c \
 				src/utils/u_free.c \
-              # ajoute ici les autres fichiers .c de ton projet
+				src/print.c
 
 OBJ         = $(SRC:.c=.o)
 
