@@ -29,6 +29,7 @@ SRC_FILES   = main.c \
 				parsing/p_split_map.c \
 				parsing/p_split_map_utils.c \
 				parsing/p_color.c \
+				parsing/check_texture.c \
 				utils/u_free.c \
 				print.c
 
