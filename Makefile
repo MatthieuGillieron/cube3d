@@ -3,58 +3,93 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
+#    By: mg <mg@student.42.fr>                      +#+  +:+       +#+         #
+#                                                +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/23 14:54:30 by maximemarti       #+#    #+#              #
-#    Updated: 2025/06/24 08:42:05 by maximemarti      ###   ########.fr        #
+#    Updated: 2025/06/24 09:34:50 by mg               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = cube3d
-
-SRC         = src/main.c \
-				src/parsing/p_assign_map.c \
-				src/parsing/p_map_ok.c \
-				src/parsing/p_split_map.c \
-				src/parsing/p_split_map_utils.c \
-				src/parsing/p_color.c \
-				src/utils/u_free.c \
-				src/print.c
-
-OBJ         = $(SRC:.c=.o)
+NAME = cube3d
 
 CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror
+RM          = rm -f
 
-# Répertoires et librairies
-LIBFT_DIR   = libft
+SRCDIR      = src
+OBJDIR      = obj
+INCDIR      = includes
+LIBFTDIR    = libft
 MLX_DIR     = mlx
 
-LIBFT       = $(LIBFT_DIR)/libft.a
+SRC_FILES   = main.c \
+				parsing/p_assign_map.c \
+				parsing/p_map_ok.c \
+				parsing/p_split_map.c \
+				parsing/p_split_map_utils.c \
+				parsing/p_color.c \
+				utils/u_free.c \
+				print.c
+
+SRCS        = $(addprefix $(SRCDIR)/, $(SRC_FILES))
+OBJS        = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJ_DIRS    = $(sort $(dir $(OBJS)))
+
+LIBFT       = $(LIBFTDIR)/libft.a
 MLX         = $(MLX_DIR)/libmlx.a
 
-INCLUDES    = -I$(LIBFT_DIR) -I$(MLX_DIR)
-
+INCLUDES    = -I$(INCDIR) -I$(LIBFTDIR) -I$(MLX_DIR)
 MLX_FLAGS   = -framework OpenGL -framework AppKit
 
-all: $(NAME)
+SUCCESS     = "\033[1;92m Compilation réussie ! ✅\033[0m"
+FAILURE     = "\033[1;91m Erreur de compilation ! ❌\033[0m"
+LIBFT_COMP  = "\033[1;94m Compilation de la libft... 🔨\033[0m"
+CUBE_COMP   = "\033[1;94m Compilation de cube3d... 🔨\033[0m"
+MLX_COMP    = "\033[1;94m Compilation de la MLX... 🔨\033[0m"
+CLEAN_MSG   = "\033[1;93m Nettoyage des fichiers objets... 🧹\033[0m"
+FCLEAN_MSG  = "\033[1;93m Nettoyage complet... 🧹\033[0m"
 
-$(NAME): $(OBJ)
-	@make -C $(MLX_DIR)
-	@make -C $(LIBFT_DIR)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(INCLUDES) $(MLX_FLAGS) -o $(NAME)
-	@echo "✅ Compilation terminée."
+all: $(OBJ_DIRS) $(NAME)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIRS):
+	@mkdir -p $@
+
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(INCLUDES) $(MLX_FLAGS) -o $(NAME)
+	@echo "\033[1;35m"
+	@echo " ____             __                      __       __     "
+	@echo "/\\  _\`\\          /\\ \\                   /'__\`\\    /\\ \\    "
+	@echo "\\ \\ \\/\\_\\  __  __\\ \\ \\____     __      /\\_\\L\\ \\   \\_\\ \\   "
+	@echo " \\ \\ \\/_/_/\\ \\/\\ \\\\ \\ '__\`\\  /'__\`\\    \\/_/_\\_<_  /'_\` \\  "
+	@echo "  \\ \\ \\L\\ \\ \\ \\_\\ \\\\ \\ \\L\\ \\/\\  __/      /\\ \\L\\ \\/\\ \\L\\ \\ "
+	@echo "   \\ \\____/\\ \\____/ \\ \\_,__/\\ \\____\\     \\ \\____/\\ \\___,_\\"
+	@echo "    \\/___/  \\/___/   \\/___/  \\/____/      \\/___/  \\/__,_ /"
+	@echo "\033[0m"
+	@echo "\033[1;92m✅ Compilation terminée !\033[0m"
+
+$(LIBFT):
+	@echo $(LIBFT_COMP)
+	@make -C $(LIBFTDIR) > /dev/null 2>&1
+
+$(MLX):
+	@echo $(MLX_COMP)
+	@make -C $(MLX_DIR) > /dev/null 2>&1
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@make clean -C $(MLX_DIR)
-	@make clean -C $(LIBFT_DIR)
-	@rm -f $(OBJ)
+	@echo $(CLEAN_MSG)
+	@$(RM) -r $(OBJDIR) 2>/dev/null || true
+	@make clean -C $(LIBFTDIR) > /dev/null 2>&1
+	@make clean -C $(MLX_DIR) > /dev/null 2>&1
 
 fclean: clean
-	@make fclean -C $(LIBFT_DIR)
-	@rm -f $(NAME)
+	@echo $(FCLEAN_MSG)
+	@$(RM) $(NAME)
+	@make fclean -C $(LIBFTDIR) > /dev/null 2>&1
 
 re: fclean all
+
+.PHONY: all clean fclean re
