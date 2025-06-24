@@ -22,22 +22,28 @@ static int	validate_rgb(int r, int g, int b)
 int	rgb_to_hex(char *rgb_str)
 {
 	char	**rgb_split;
+	char	*trimmed;
 	int		r;
 	int		g;
 	int		b;
+	int		i;
 
-	rgb_split = ft_split(rgb_str, ',');
+	trimmed = ft_strtrim(rgb_str, " \t\n\r");
+	if (!trimmed)
+		return (-1);
+	rgb_split = ft_split(trimmed, ',');
+	free(trimmed);
 	if (!rgb_split || !rgb_split[0] || !rgb_split[1] || !rgb_split[2])
 		return (-1);
 	r = ft_atoi(rgb_split[0]);
 	g = ft_atoi(rgb_split[1]);
 	b = ft_atoi(rgb_split[2]);
-	if (!validate_rgb(r, g, b))
-	{
-		free(rgb_split);
-		return (-1);
-	}
+	i = 0;
+	while (rgb_split[i])
+		free(rgb_split[i++]);
 	free(rgb_split);
+	if (!validate_rgb(r, g, b))
+		return (-1);
 	return ((r << 16) | (g << 8) | b);
 }
 

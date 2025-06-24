@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 11:32:49 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 17:04:07 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	render_background(t_game *game)
 		while (x < game->win_w)
 		{
 			if (y < game->win_h / 2)
-				color = game->map_data.colors.set_ceiling;
+				color = game->color.set_ceiling;
 			else
-				color = game->map_data.colors.set_floor;
+				color = game->color.set_floor;
 			dst = game->img.addr
 				+ (y * game->img.line_len + x * (game->img.bpp / 8));
 			*(unsigned int *)dst = color;
@@ -70,17 +70,24 @@ int	main(int ac, char **av)
 {
 	char		**files;
 	t_map_data	map = {0};
-	t_game		game;
+	t_game		game = {0};
 
 	if (ac != 2)
 		return (1);
 	files = open_map(av[1]);
-	if (check_file(files, map))
+	if (!files)
 		return (1);
+	if (!split_sections(files, &map))
+		return (1);
+	game.color.set_floor = rgb_to_hex(map.colors.floor);
+	game.color.set_ceiling = rgb_to_hex(map.colors.ceiling);
+	printf("Floor: 0x%08X, Ceiling: 0x%08X\n", 
+		game.color.set_floor, game.color.set_ceiling);
+	game.player = map.player;
+	game.map = map.map;
 	if (!init_game(&game))
 		return (1);
 	mlx_loop_hook(game.mlx, render_loop, &game);
-
 	mlx_loop(game.mlx);
 	return (0);
 }
