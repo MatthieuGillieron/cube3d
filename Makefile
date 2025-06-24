@@ -12,18 +12,6 @@
 
 NAME        = cube3d
 
-SRC         = src/main.c \
-				src/parsing/p_assign_map.c \
-				src/parsing/p_map_ok.c \
-				src/parsing/p_map_ok_u.c \
-				src/parsing/p_split_map.c \
-				src/parsing/p_split_map_utils.c \
-				src/parsing/p_color.c \
-				src/utils/u_free.c \
-				src/print.c
-
-OBJ         = $(SRC:.c=.o)
-
 CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -f
@@ -36,6 +24,7 @@ MLX_DIR     = mlx
 
 SRC_FILES   = main.c \
 				parsing/p_assign_map.c \
+				parsing/p_map_ok_u.c \
 				parsing/p_map_ok.c \
 				parsing/p_split_map.c \
 				parsing/p_split_map_utils.c \
