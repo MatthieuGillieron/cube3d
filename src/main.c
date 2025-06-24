@@ -6,12 +6,11 @@
 /*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 17:04:07 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/24 18:01:48 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
-
 
 void	render_background(t_game *game)
 {
@@ -52,11 +51,10 @@ int	render_loop(t_game *game)
 	return (0);
 }
 
- int	init_game(t_game *game)
+int	init_game(t_game *game)
 {
 	game->win_w = 640;
 	game->win_h = 480;
-
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (0);
@@ -69,8 +67,11 @@ int	render_loop(t_game *game)
 int	main(int ac, char **av)
 {
 	char		**files;
-	t_map_data	map = {0};
-	t_game		game = {0};
+	t_map_data	map;
+	t_game		game;
+
+	ft_bzero(&map, sizeof(map));
+	ft_bzero(&game, sizeof(game));
 
 	if (ac != 2)
 		return (1);
@@ -81,8 +82,6 @@ int	main(int ac, char **av)
 		return (1);
 	game.color.set_floor = rgb_to_hex(map.colors.floor);
 	game.color.set_ceiling = rgb_to_hex(map.colors.ceiling);
-	printf("Floor: 0x%08X, Ceiling: 0x%08X\n", 
-		game.color.set_floor, game.color.set_ceiling);
 	game.player = map.player;
 	game.map = map.map;
 	if (!init_game(&game))

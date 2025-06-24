@@ -23,15 +23,15 @@ LIBFTDIR    = libft
 MLX_DIR     = mlx
 
 SRC_FILES   = main.c \
-				parsing/p_assign_map.c \
-				parsing/p_map_ok_u.c \
-				parsing/p_map_ok.c \
-				parsing/p_split_map.c \
-				parsing/p_split_map_utils.c \
+				parsing/p_check_texture.c \
 				parsing/p_color.c \
-				parsing/check_texture.c \
-				utils/u_free.c \
-				utils/u_dir.c \
+				parsing/p_file.c \
+				parsing/p_map_ok_u.c \
+				parsing/p_map.c \
+				parsing/p_texture.c \
+				parsing/p_valid_map.c \
+				utils/u_cleanup.c \
+				utils/u_dir_player.c \
 				print.c \
 
 SRCS        = $(addprefix $(SRCDIR)/, $(SRC_FILES))

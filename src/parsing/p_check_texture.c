@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_texture.c                                    :+:      :+:    :+:   */
+/*   p_check_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:45:11 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 11:44:46 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 17:55:25 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	check_path(t_map_data *data, void *mlx_ptr)
 int	check_file(char **files, t_map_data	map)
 {
 	//void	*mlx;
-
 	if (!split_sections(files, &map))
 	{
 		printf("Error\nInvalid map format.\n");
