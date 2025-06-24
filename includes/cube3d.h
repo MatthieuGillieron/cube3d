@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 09:08:22 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/24 09:59:17 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ typedef struct s_map_data {
 	char		**map;
 }	t_map_data;
 
+typedef struct s_map_check
+{
+	t_player	*player;
+	int			player_count;
+}	t_map_check;
+
 //--------------parsing----------------
 //--------------p_split_map.c-----------------------
 char	**open_map(char *map);
@@ -60,7 +66,9 @@ int		find_map_start(char **lines, int i);
 int		assign_texture_or_color(char *line, t_map_data *data, int *found);
 //--------------p_map_ok.c--------------------
 int		is_map_enclosed(char **map, t_player *player);
-
+//-------------p_map_ok_u.c--------------
+int		is_player(char c);
+int		is_playable(char c);
 //---------------utils------------------------
 //---------------u_free.c------------------------
 void	free_map_data(t_map_data *data);
