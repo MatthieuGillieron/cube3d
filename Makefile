@@ -93,4 +93,14 @@ fclean: clean
 
 re: fclean all
 
+leaks: $(NAME)
+	@echo "\033[1;94m Vérification des fuites mémoire... 🔍\033[0m"
+ifeq ($(shell uname), Darwin)
+	@leaks -atExit -- ./$(NAME) || true
+else
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+endif
+
+.PHONY: all clean fclean re libft_make leaks
+
 .PHONY: all clean fclean re
