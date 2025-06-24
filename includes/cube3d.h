@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 08:45:17 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 08:48:03 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ typedef struct s_player
 }	t_player;
 
 typedef struct s_map_data {
-	t_texture textures;
-	t_color colors;
-	t_player player;
-	char **map;
+	t_texture	textures;
+	t_color		colors;
+	t_player	player;
+	char		**map;
 }	t_map_data;
 
 //--------------parsing----------------
@@ -64,8 +64,6 @@ int		is_map_enclosed(char **map, t_player *player);
 //---------------utils------------------------
 //---------------u_free.c------------------------
 void	free_map_data(t_map_data *data);
-
-
 //-------------------print-helper.c----------------
 void	print_map_data(t_map_data *data);
 void	print_player(t_player *player);
