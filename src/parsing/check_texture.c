@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:45:11 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 10:45:56 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 11:03:22 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	check_file(char **files, t_map_data	map)
 		return (1);
 	}*/
 	parse_colors(&map);
+	assign_direction(&map.player);
 	print_map_data(&map);
 	print_player(&map.player);
 	return (0);

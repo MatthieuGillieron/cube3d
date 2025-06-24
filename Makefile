@@ -31,7 +31,8 @@ SRC_FILES   = main.c \
 				parsing/p_color.c \
 				parsing/check_texture.c \
 				utils/u_free.c \
-				print.c
+				utils/u_dir.c \
+				print.c \
 
 SRCS        = $(addprefix $(SRCDIR)/, $(SRC_FILES))
 OBJS        = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)

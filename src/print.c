@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:44:03 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 09:06:48 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/24 11:00:57 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ void	print_player(t_player *player)
 	printf("  X: %d\n", player->x);
 	printf("  Y: %d\n", player->y);
 	printf("  Direction: %c\n", player->direction);
+	printf("  Direction angle : %d\n", player->dir);
 }

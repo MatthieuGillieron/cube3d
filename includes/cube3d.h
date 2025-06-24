@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 10:46:53 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 11:04:01 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_player
 	int		x;
 	int		y;
 	char	direction;
+	int		dir;
 }	t_player;
 
 typedef struct s_map_data {
@@ -74,6 +75,7 @@ int		check_file(char **files, t_map_data	map);
 //---------------utils------------------------
 //---------------u_free.c------------------------
 void	free_map_data(t_map_data *data);
+void	assign_direction(t_player *player);
 //-------------------print-helper.c----------------
 void	print_map_data(t_map_data *data);
 void	print_player(t_player *player);
