@@ -6,7 +6,7 @@
 /*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 18:01:48 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/24 19:48:46 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,15 @@ int	main(int ac, char **av)
 
 	ft_bzero(&map, sizeof(map));
 	ft_bzero(&game, sizeof(game));
-
 	if (ac != 2)
 		return (1);
 	files = open_map(av[1]);
 	if (!files)
 		return (1);
-	if (!split_sections(files, &map))
+	if (check_file(files, &map))
 		return (1);
-	game.color.set_floor = rgb_to_hex(map.colors.floor);
-	game.color.set_ceiling = rgb_to_hex(map.colors.ceiling);
+	game.color.set_floor = map.colors.set_floor;
+	game.color.set_ceiling = map.colors.set_ceiling;
 	game.player = map.player;
 	game.map = map.map;
 	if (!init_game(&game))

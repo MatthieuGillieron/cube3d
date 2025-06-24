@@ -6,7 +6,7 @@
 /*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 17:04:01 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/24 19:46:29 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		is_map_enclosed(char **map, t_player *player);
 int		is_player(char c);
 int		is_playable(char c);
 //-------------check_texture.c--------------
-int		check_file(char **files, t_map_data	map);
+int		check_file(char **files, t_map_data *map);
 //---------------utils------------------------
 //---------------u_free.c------------------------
 void	free_map_data(t_map_data *data);
