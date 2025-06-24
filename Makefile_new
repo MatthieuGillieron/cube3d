@@ -1,0 +1,84 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mg <mg@student.42.fr>                      +#+  +:+       +#+         #
+#                                                +#+#+#+#+#+   +#+            #
+#    Created: 2025/01/02 00:00:00 by mg                #+#    #+#              #
+#    Updated: 2025/01/02 00:00:00 by mg               ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME		= cub3D
+
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
+RM			= rm -f
+
+SRCDIR		= src
+OBJDIR		= obj
+INCDIR		= includes
+LIBFTDIR	= libft
+MLXDIR		= mlx
+
+INIT_FILES	= init_game.c init_player.c init_mlx.c
+PARSE_FILES	= parse_file.c parse_textures.c parse_colors.c parse_map.c validate_map.c
+RAY_FILES	= raycast.c dda.c wall_calc.c texture_calc.c
+RENDER_FILES= render.c draw_wall.c draw_floor.c draw_ceiling.c
+EVENT_FILES	= key_events.c mouse_events.c window_events.c
+MOVE_FILES	= move_player.c rotate_player.c collision.c
+UTIL_FILES	= cleanup.c error.c math_utils.c string_utils.c
+
+SRC_FILES	= main.c \
+			  $(addprefix init/, $(INIT_FILES)) \
+			  $(addprefix parsing/, $(PARSE_FILES)) \
+			  $(addprefix raycasting/, $(RAY_FILES)) \
+			  $(addprefix render/, $(RENDER_FILES)) \
+			  $(addprefix events/, $(EVENT_FILES)) \
+			  $(addprefix movement/, $(MOVE_FILES)) \
+			  $(addprefix utils/, $(UTIL_FILES))
+
+SRCS		= $(addprefix $(SRCDIR)/, $(SRC_FILES))
+OBJS		= $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJ_DIRS	= $(sort $(dir $(OBJS)))
+
+LIBFT		= $(LIBFTDIR)/libft.a
+MLX			= $(MLXDIR)/libmlx.a
+
+INCLUDES	= -I$(INCDIR) -I$(LIBFTDIR) -I$(MLXDIR)
+MLX_FLAGS	= -framework OpenGL -framework AppKit
+
+all: $(OBJ_DIRS) $(NAME)
+
+$(OBJ_DIRS):
+	@mkdir -p $@
+
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(INCLUDES) $(MLX_FLAGS) -o $(NAME)
+	@echo "✅ $(NAME) compiled successfully!"
+
+$(LIBFT):
+	@make -C $(LIBFTDIR)
+
+$(MLX):
+	@make -C $(MLXDIR)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+clean:
+	@$(RM) -r $(OBJDIR)
+	@make clean -C $(LIBFTDIR)
+	@make clean -C $(MLXDIR)
+	@echo "🧹 Object files cleaned"
+
+fclean: clean
+	@$(RM) $(NAME)
+	@make fclean -C $(LIBFTDIR)
+	@echo "🧹 Full clean completed"
+
+re: fclean all
+
+.PHONY: all clean fclean re
