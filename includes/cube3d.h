@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 19:46:29 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/24 20:08:00 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,5 @@ void	print_texture(t_texture *tex);
 //-------------------color.c----------------
 int		rgb_to_hex(char *rgb_str);
 void	parse_colors(t_map_data *data);
+int	is_line_empty(const char *line);
 #endif
