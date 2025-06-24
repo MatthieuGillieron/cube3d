@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 20:08:00 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 22:41:06 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include <stdio.h> 
+# include <math.h>
 # include "../mlx/mlx.h"
 
 typedef struct s_texture {
@@ -75,6 +76,35 @@ typedef struct s_game
 	t_player	player;
 	char		**map;
 }	t_game;
+
+typedef struct s_ray_pos
+{
+	double	pos_x;
+	double	pos_y;
+	int		map_x;
+	int		map_y;
+}	t_ray_pos;
+
+typedef struct s_ray_hit
+{
+	double	distance;
+	int		map_x;
+	int		map_y;
+	int		side;
+	double	wall_x;
+}	t_ray_hit;
+
+typedef struct s_ray_dir
+{
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		step_x;
+	int		step_y;
+}	t_ray_dir;
 
 //--------------parsing----------------
 //--------------p_split_map.c-----------------------
