@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 11:04:01 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 11:07:06 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_player
 	int		x;
 	int		y;
 	char	direction;
-	int		dir;
+	double	angle;
 }	t_player;
 
 typedef struct s_map_data {

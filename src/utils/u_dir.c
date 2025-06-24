@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 11:03:39 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 11:03:55 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 11:07:44 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	assign_direction(t_player *player)
 {
 	if (player->direction == 'N')
-    	player->dir = 270;
+    	player->angle = 270;
 	else if (player->direction == 'S')
-		player->dir = 90;
+		player->angle = 90;
 	else if (player->direction == 'E')
-		player->dir = 0;
+		player->angle = 0;
 	else if (player->direction == 'W')
-		player->dir = 180;
+		player->angle = 180;
 }
