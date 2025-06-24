@@ -3,27 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   p_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:41:16 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 17:56:00 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/24 20:20:23 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
 
+int	is_line_potential_map(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	return (line[i] == '1' || line[i] == '0');
+}
+
+int	is_line_empty(const char *line)
+{
+	while (*line)
+	{
+		if (*line != ' ' && *line != '\t' && *line != '\n')
+			return (0);
+		line++;
+	}
+	return (1);
+}
+
 int	find_map_start(char **lines, int i)
 {
-	int	j;
-
-	while (lines[i] != NULL)
+	while (lines[i])
 	{
-		j = 0;
-		while (lines[i][j] == ' ' || lines[i][j] == '\t')
-			j++;
-		if (lines[i][j] == '1' || lines[i][j] == '0')
+		if (is_line_empty(lines[i]))
+		{
+			i++;
+			continue ;
+		}
+		if (is_line_potential_map(lines[i]))
 			return (i);
-		i++;
+		return (-1);
 	}
 	return (-1);
 }

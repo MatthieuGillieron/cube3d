@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_split_map.c                                      :+:      :+:    :+:   */
+/*   p_file.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 17:23:26 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 08:42:52 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/24 20:20:16 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,27 @@ static int	check_header_lines(char **lines, t_map_data *data, int *index)
 	i = 0;
 	while (lines[i] != NULL && found < 6)
 	{
+		if (is_line_empty(lines[i]))
+		{
+			i++;
+			continue ;
+		}
 		if (!assign_texture_or_color(lines[i], data, &found))
 			return (-1);
 		i++;
 	}
 	*index = i;
-	return (found);
+	return (found == 6);
 }
 
 static int	check_blank_lines_between(char **lines, int start, int end)
 {
 	int	j;
-	int	k;
 
 	j = start;
 	while (j < end)
 	{
-		k = 0;
-		while (lines[j][k] == ' ' || lines[j][k] == '\t')
-			k++;
-		if (lines[j][k] != '\0' && lines[j][k] != '\n')
+		if (!is_line_empty(lines[j]))
 			return (0);
 		j++;
 	}
