@@ -6,7 +6,7 @@
 #    By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/23 14:54:30 by maximemarti       #+#    #+#              #
-#    Updated: 2025/06/24 08:42:05 by maximemarti      ###   ########.fr        #
+#    Updated: 2025/06/24 09:59:45 by maximemarti      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME        = cube3d
 SRC         = src/main.c \
 				src/parsing/p_assign_map.c \
 				src/parsing/p_map_ok.c \
+				src/parsing/p_map_ok_u.c \
 				src/parsing/p_split_map.c \
 				src/parsing/p_split_map_utils.c \
 				src/parsing/p_color.c \
