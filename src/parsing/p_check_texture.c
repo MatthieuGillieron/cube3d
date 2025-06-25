@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_check_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:45:11 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 19:46:26 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/25 10:23:58 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	check_path(t_map_data *data, void *mlx_ptr)
 
 int	check_file(char **files, t_map_data *map)
 {
+	//void *mlx;
 	if (!split_sections(files, map))
 	{
 		printf("Error\nInvalid map format.\n");
@@ -83,7 +84,17 @@ int	check_file(char **files, t_map_data *map)
 		printf("Map not good\n");
 		return (1);
 	}
+	//mlx = mlx_init();
+	/*if (!check_path(&map, mlx))
+	{
+		printf("Error\nInvalid texture paths.\n");
+		free_map_data(&map);
+		free(files);
+		return (1);
+	}*/
 	parse_colors(map);
 	assign_direction(&map->player);
+	print_map_data(map);
+	print_player(&map->player);
 	return (0);
 }
