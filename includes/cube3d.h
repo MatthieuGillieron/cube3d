@@ -138,4 +138,7 @@ void	print_texture(t_texture *tex);
 int		rgb_to_hex(char *rgb_str);
 void	parse_colors(t_map_data *data);
 int	is_line_empty(const char *line);
+//-------------------events.c----------------
+int		close_window(t_game *game);
+int		key_press(int keycode, t_game *game);
 #endif

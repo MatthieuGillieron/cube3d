@@ -218,6 +218,8 @@ int	main(int ac, char **av)
 	game.map = map.map;
 	if (!init_game(&game))
 		return (1);
+	mlx_hook(game.win, 17, 0, close_window, &game);
+	mlx_key_hook(game.win, key_press, &game);
 	mlx_loop_hook(game.mlx, render_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);
