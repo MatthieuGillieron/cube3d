@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 22:41:06 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/26 15:54:12 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,4 +141,13 @@ int	is_line_empty(const char *line);
 //-------------------events.c----------------
 int		close_window(t_game *game);
 int		key_press(int keycode, t_game *game);
+//---------------render----------------------
+int	render_loop(void *param);
+void	render_background(t_game *game); 
+void	draw_wall_slice(t_game *game, int x, t_ray_hit *hit);
+//--------------init--------------------
+int	init_game(t_game *game);
+//------------raycasting----------------
+t_ray_hit	cast_ray(t_game *game, double ray_angle);
+
 #endif
