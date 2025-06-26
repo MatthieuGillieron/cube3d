@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 23:21:54 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/26 15:38:29 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,19 +182,6 @@ int	render_loop(void *param)
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	mlx_destroy_image(game->mlx, game->img.img);
 	return (0);
-}
-
-int	init_game(t_game *game)
-{
-	game->win_w = 640;
-	game->win_h = 480;
-	game->mlx = mlx_init();
-	if (!game->mlx)
-		return (0);
-	game->win = mlx_new_window(game->mlx, game->win_w, game->win_h, "cub3D");
-	if (!game->win)
-		return (0);
-	return (1);
 }
 
 int	main(int ac, char **av)
