@@ -6,7 +6,7 @@
 /*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/26 15:54:12 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/26 16:06:55 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <math.h>
 # include "../mlx/mlx.h"
 
+//--------[ STRUCTURE ]----------
 typedef struct s_texture {
 	char	*no;
 	char	*so;
@@ -106,48 +107,51 @@ typedef struct s_ray_dir
 	int		step_y;
 }	t_ray_dir;
 
-//--------------parsing----------------
-//--------------p_split_map.c-----------------------
-char	**open_map(char *map);
-int		split_sections(char **lines, t_map_data *data);
-//------------p_split_map_utils.c----------------
-int		find_map_start(char **lines, int i);
-int		copy_map(char **lines, t_map_data *data, int start);
-int		is_data_complete(t_map_data *data);
-//--------------p_assign_map.c------------------------
-int		find_map_start(char **lines, int i);
-int		assign_texture_or_color(char *line, t_map_data *data, int *found);
-//--------------p_map_ok.c--------------------
-int		is_map_enclosed(char **map, t_player *player);
-//-------------p_map_ok_u.c--------------
-int		is_player(char c);
-int		is_playable(char c);
-//-------------check_texture.c--------------
-int		check_file(char **files, t_map_data *map);
-//---------------utils------------------------
-//---------------u_free.c------------------------
+
+//-----------[ PROTOTYPES ]----------------
+
+//-----------*** events ***----------------
+int			close_window(t_game *game);
+int			key_press(int keycode, t_game *game);
+
+//-----------*** init ***------------------
+int			init_game(t_game *game);
+
+//-----------*** movement ***--------------
+
+//-----------*** parsing ***---------------
+char		**open_map(char *map);
+int			split_sections(char **lines, t_map_data *data);
+int			find_map_start(char **lines, int i);
+int			copy_map(char **lines, t_map_data *data, int start);
+int			is_data_complete(t_map_data *data);
+int			find_map_start(char **lines, int i);
+int			assign_texture_or_color(char *line, t_map_data *data, int *found);
+int			is_map_enclosed(char **map, t_player *player);
+int			is_player(char c);
+int			is_playable(char c);
+int			check_file(char **files, t_map_data *map);
+int			rgb_to_hex(char *rgb_str);
+void		parse_colors(t_map_data *data);
+int			is_line_empty(const char *line);
+
+//-----------*** raycasting ***------------
+t_ray_hit	cast_ray(t_game *game, double ray_angle);
+
+//-----------*** render ***----------------
+int			render_loop(void *param);
+void		render_background(t_game *game); 
+void		draw_wall_slice(t_game *game, int x, t_ray_hit *hit);
+
+//-----------*** utils ***-----------------
 void	free_map_data(t_map_data *data);
 void	assign_direction(t_player *player);
-//-------------------print-helper.c----------------
+
+//------------*** TEST ***-----------------
 void	print_map_data(t_map_data *data);
 void	print_player(t_player *player);
 void	print_map(char **map);
 void	print_color(t_color *col);
 void	print_texture(t_texture *tex);
-//-------------------color.c----------------
-int		rgb_to_hex(char *rgb_str);
-void	parse_colors(t_map_data *data);
-int	is_line_empty(const char *line);
-//-------------------events.c----------------
-int		close_window(t_game *game);
-int		key_press(int keycode, t_game *game);
-//---------------render----------------------
-int	render_loop(void *param);
-void	render_background(t_game *game); 
-void	draw_wall_slice(t_game *game, int x, t_ray_hit *hit);
-//--------------init--------------------
-int	init_game(t_game *game);
-//------------raycasting----------------
-t_ray_hit	cast_ray(t_game *game, double ray_angle);
 
 #endif
