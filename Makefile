@@ -23,6 +23,7 @@ LIBFTDIR    = libft
 MLX_DIR     = mlx
 
 SRC_FILES   = main.c \
+				events/e_window.c \
 				parsing/p_check_texture.c \
 				parsing/p_color.c \
 				parsing/p_file.c \
