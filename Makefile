@@ -24,6 +24,7 @@ MLX_DIR     = mlx
 
 SRC_FILES   = main.c \
 				events/e_window.c \
+				init/i_game.c \
 				parsing/p_check_texture.c \
 				parsing/p_color.c \
 				parsing/p_file.c \
@@ -31,9 +32,13 @@ SRC_FILES   = main.c \
 				parsing/p_map.c \
 				parsing/p_texture.c \
 				parsing/p_valid_map.c \
+				raycasting/r_cast.c \
+				render/r_background.c \
+				render/r_wall.c \
+				render/r_loop.c \
 				utils/u_cleanup.c \
 				utils/u_dir_player.c \
-				print.c \
+				print.c
 
 SRCS        = $(addprefix $(SRCDIR)/, $(SRC_FILES))
 OBJS        = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
