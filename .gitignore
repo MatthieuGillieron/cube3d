@@ -2,5 +2,5 @@
 *.a
 .vscode
 .DS_Store
-.amazonq
+.amazonq/
 ANALYSE_PARSING.md
