@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/26 15:44:23 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/29 09:34:05 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av)
 		return (1);
 	if (check_file(files, &map))
 		return (1);
+	game.map_data = map;
 	game.color.set_floor = map.colors.set_floor;
 	game.color.set_ceiling = map.colors.set_ceiling;
 	game.player = map.player;

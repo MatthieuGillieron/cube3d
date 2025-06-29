@@ -3,26 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   r_cast.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:04 by mg                #+#    #+#             */
-/*   Updated: 2025/06/26 15:40:20 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/29 09:57:13 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
 
-static void	init_ray_vars(t_game *game, double ray_angle,
-	t_ray_pos *pos, t_ray_dir *dir)
+static void	set_dir_delta(t_ray_dir *dir)
 {
-	pos->pos_x = (double)game->player.x + 0.5;
-	pos->pos_y = (double)game->player.y + 0.5;
-	pos->map_x = (int)pos->pos_x;
-	pos->map_y = (int)pos->pos_y;
-	dir->ray_dir_x = cos(ray_angle);
-	dir->ray_dir_y = sin(ray_angle);
-	dir->delta_dist_x = (dir->ray_dir_x == 0) ? 1e30 : fabs(1 / dir->ray_dir_x);
-	dir->delta_dist_y = (dir->ray_dir_y == 0) ? 1e30 : fabs(1 / dir->ray_dir_y);
+	if (dir->ray_dir_x == 0)
+		dir->delta_dist_x = 1e30;
+	else
+		dir->delta_dist_x = fabs(1 / dir->ray_dir_x);
+	if (dir->ray_dir_y == 0)
+		dir->delta_dist_y = 1e30;
+	else
+		dir->delta_dist_y = fabs(1 / dir->ray_dir_y);
+}
+
+static void	set_step_side_dist(t_ray_pos *pos, t_ray_dir *dir)
+{
 	if (dir->ray_dir_x < 0)
 	{
 		dir->step_x = -1;
@@ -43,6 +46,19 @@ static void	init_ray_vars(t_game *game, double ray_angle,
 		dir->step_y = 1;
 		dir->side_dist_y = (pos->map_y + 1.0 - pos->pos_y) * dir->delta_dist_y;
 	}
+}
+
+static void	init_ray_vars(t_game *game, double ray_angle,
+	t_ray_pos *pos, t_ray_dir *dir)
+{
+	pos->pos_x = (double)game->player.x + 0.5;
+	pos->pos_y = (double)game->player.y + 0.5;
+	pos->map_x = (int)pos->pos_x;
+	pos->map_y = (int)pos->pos_y;
+	dir->ray_dir_x = cos(ray_angle);
+	dir->ray_dir_y = sin(ray_angle);
+	set_dir_delta(dir);
+	set_step_side_dist(pos, dir);
 }
 
 static int	perform_dda(t_game *game, t_ray_pos *pos, t_ray_dir *dir, int *side)
@@ -80,9 +96,11 @@ t_ray_hit	cast_ray(t_game *game, double ray_angle)
 	init_ray_vars(game, ray_angle, &pos, &dir);
 	perform_dda(game, &pos, &dir, &side);
 	if (side == 0)
-		hit.distance = (pos.map_x - pos.pos_x + (1 - dir.step_x) / 2) / dir.ray_dir_x;
+		hit.distance = (pos.map_x - pos.pos_x + \
+			(1 - dir.step_x) / 2) / dir.ray_dir_x;
 	else
-		hit.distance = (pos.map_y - pos.pos_y + (1 - dir.step_y) / 2) / dir.ray_dir_y;
+		hit.distance = (pos.map_y - pos.pos_y + \
+			(1 - dir.step_y) / 2) / dir.ray_dir_y;
 	if (side == 0)
 		hit.wall_x = pos.pos_y + hit.distance * dir.ray_dir_y;
 	else

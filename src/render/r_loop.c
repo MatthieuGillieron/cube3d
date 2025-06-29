@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_loop.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:43:53 by mg                #+#    #+#             */
-/*   Updated: 2025/06/26 15:53:30 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/29 09:50:43 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ int	render_loop(void *param)
 {
 	t_game		*game;
 	int			x;
-	double		ray_angle;
-	double		fov;
 	double		start_angle;
+	double		ray_angle;
 	t_ray_hit	hit;
 
 	game = (t_game *)param;
-	fov = M_PI / 3;
-	start_angle = game->player.angle - (fov / 2);
+	start_angle = game->player.angle - (FOV / 2);
 	game->img.img = mlx_new_image(game->mlx, game->win_w, game->win_h);
 	game->img.addr = mlx_get_data_addr(game->img.img,
 			&game->img.bpp, &game->img.line_len, &game->img.endian);
@@ -31,9 +29,9 @@ int	render_loop(void *param)
 	x = 0;
 	while (x < game->win_w)
 	{
-		ray_angle = start_angle + ((double)x / game->win_w) * fov;
+		ray_angle = start_angle + ((double)x / game->win_w) * FOV;
 		hit = cast_ray(game, ray_angle);
-		draw_wall_slice(game, x, &hit);
+		draw_wall_slice(game, x, &hit, ray_angle);
 		x++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
