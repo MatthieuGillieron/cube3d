@@ -24,6 +24,7 @@ MLX_DIR     = mlx
 
 SRC_FILES   = main.c \
 				events/e_window.c \
+				events/m_movement.c \
 				init/i_game.c \
 				init/i_textures.c \
 				parsing/p_check_texture.c \

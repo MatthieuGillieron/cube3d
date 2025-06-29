@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:44:03 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 11:35:11 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/29 15:14:56 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	print_map_data(t_map_data *data)
 void	print_player(t_player *player)
 {
 	printf("Player:\n");
-	printf("  X: %d\n", player->x);
-	printf("  Y: %d\n", player->y);
+	printf("  X: %f\n", player->x);
+	printf("  Y: %f\n", player->y);
 	printf("  Direction: %c\n", player->direction);
 	printf("  Direction angle : %f\n", player->angle);
 }

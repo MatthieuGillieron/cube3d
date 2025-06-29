@@ -38,8 +38,8 @@ typedef struct s_color {
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 	char	direction;
 	double	angle;
 }	t_player;
@@ -138,6 +138,11 @@ int			init_game(t_game *game);
 int			load_textures(t_game *game);
 
 //-----------*** movement ***--------------
+void		move_forward(t_game *game);
+void		move_backward(t_game *game);
+void		move_left(t_game *game);
+void		move_right(t_game *game);
+void		rotate_player(t_game *game, int direction);
 
 //-----------*** parsing ***---------------
 char		**open_map(char *map);
