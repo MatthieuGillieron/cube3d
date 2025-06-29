@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:35:38 by mg                #+#    #+#             */
-/*   Updated: 2025/06/29 17:23:34 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/29 17:35:50 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ int	init_game(t_game *game)
 {
 	game->win_w = 640;
 	game->win_h = 480;
-	game->key_w = 0;
-	game->key_s = 0;
-	game->key_a = 0;
-	game->key_d = 0;
-	game->key_left = 0;
-	game->key_right = 0;
 	game->map = game->map_data.map;
 	game->mlx = mlx_init();
 	if (!game->mlx)
