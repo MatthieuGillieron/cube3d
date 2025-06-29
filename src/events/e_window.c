@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_window.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:06:51 by mg                #+#    #+#             */
-/*   Updated: 2025/06/29 15:29:08 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/29 17:27:19 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	key_press(int keycode, t_game *game)
 	else if (keycode == 1)
 		move_backward(game);
 	else if (keycode == 0)
-		move_left(game);
+		rotate_player(game, -1);
 	else if (keycode == 2)
-		move_right(game);
+		rotate_player(game, 1);
 	else if (keycode == 123)
 		rotate_player(game, -1);
 	else if (keycode == 124)
