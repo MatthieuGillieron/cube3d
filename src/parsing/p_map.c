@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:41:16 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 20:20:23 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/29 16:22:26 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,13 @@ int	copy_map(char **lines, t_map_data *data, int start)
 	{
 		data->map[j] = ft_strdup(lines[start + j]);
 		if (!data->map[j])
+		{
+			while (--j >= 0)
+				free(data->map[j]);
+			free(data->map);
+			data->map = NULL;
 			return (0);
+		}
 		j++;
 	}
 	data->map[j] = NULL;
