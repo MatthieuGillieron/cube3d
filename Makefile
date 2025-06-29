@@ -10,7 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-
 NAME        = cube3d
 
 CC          = gcc
@@ -21,7 +20,7 @@ SRCDIR      = src
 OBJDIR      = obj
 INCDIR      = includes
 LIBFTDIR    = libft
-MLX_DIR     = mlx-l
+MLX_DIR     = mlx_linux
 
 SRC_FILES   = main.c \
 				events/e_window.c \
