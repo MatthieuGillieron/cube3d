@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/26 16:06:55 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/29 10:16:56 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <math.h>
 # include "../mlx/mlx.h"
 
+# define FOV 1.0472
 //--------[ STRUCTURE ]----------
 typedef struct s_texture {
 	char	*no;
@@ -63,7 +64,17 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
+
+typedef struct s_textures
+{
+	t_img	north;
+	t_img	south;
+	t_img	east;
+	t_img	west;
+}	t_textures;
 
 typedef struct s_game
 {
@@ -76,6 +87,7 @@ typedef struct s_game
 	t_color		color;
 	t_player	player;
 	char		**map;
+	t_textures	textures;
 }	t_game;
 
 typedef struct s_ray_pos
@@ -107,6 +119,13 @@ typedef struct s_ray_dir
 	int		step_y;
 }	t_ray_dir;
 
+typedef struct s_draw_params {
+	int		x;
+	int		draw_start;
+	int		draw_end;
+	int		tex_x;
+	int		line_height;
+}	t_draw_params;
 
 //-----------[ PROTOTYPES ]----------------
 
@@ -116,6 +135,7 @@ int			key_press(int keycode, t_game *game);
 
 //-----------*** init ***------------------
 int			init_game(t_game *game);
+int			load_textures(t_game *game);
 
 //-----------*** movement ***--------------
 
@@ -140,18 +160,22 @@ t_ray_hit	cast_ray(t_game *game, double ray_angle);
 
 //-----------*** render ***----------------
 int			render_loop(void *param);
-void		render_background(t_game *game); 
-void		draw_wall_slice(t_game *game, int x, t_ray_hit *hit);
+void		render_background(t_game *game);
+void		draw_wall_slice(t_game *game, int x, \
+	t_ray_hit *hit, double ray_angle);
+t_img		*get_wall_texture(t_game *game, \
+	t_ray_hit *hit, double ray_angle);
+int			get_texture_color(t_img *texture, int x, int y);
 
 //-----------*** utils ***-----------------
-void	free_map_data(t_map_data *data);
-void	assign_direction(t_player *player);
+void		free_map_data(t_map_data *data);
+void		assign_direction(t_player *player);
 
 //------------*** TEST ***-----------------
-void	print_map_data(t_map_data *data);
-void	print_player(t_player *player);
-void	print_map(char **map);
-void	print_color(t_color *col);
-void	print_texture(t_texture *tex);
+void		print_map_data(t_map_data *data);
+void		print_player(t_player *player);
+void		print_map(char **map);
+void		print_color(t_color *col);
+void		print_texture(t_texture *tex);
 
 #endif

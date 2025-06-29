@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_color.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 09:15:00 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 09:17:07 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/29 09:43:46 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,29 @@ static int	validate_rgb(int r, int g, int b)
 	return (1);
 }
 
+static void	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
+static int	parse_rgb(char **rgb_split, int *r, int *g, int *b)
+{
+	*r = ft_atoi(rgb_split[0]);
+	*g = ft_atoi(rgb_split[1]);
+	*b = ft_atoi(rgb_split[2]);
+	if (!validate_rgb(*r, *g, *b))
+		return (0);
+	return (1);
+}
+
 int	rgb_to_hex(char *rgb_str)
 {
 	char	**rgb_split;
@@ -26,7 +49,6 @@ int	rgb_to_hex(char *rgb_str)
 	int		r;
 	int		g;
 	int		b;
-	int		i;
 
 	trimmed = ft_strtrim(rgb_str, " \t\n\r");
 	if (!trimmed)
@@ -35,15 +57,12 @@ int	rgb_to_hex(char *rgb_str)
 	free(trimmed);
 	if (!rgb_split || !rgb_split[0] || !rgb_split[1] || !rgb_split[2])
 		return (-1);
-	r = ft_atoi(rgb_split[0]);
-	g = ft_atoi(rgb_split[1]);
-	b = ft_atoi(rgb_split[2]);
-	i = 0;
-	while (rgb_split[i])
-		free(rgb_split[i++]);
-	free(rgb_split);
-	if (!validate_rgb(r, g, b))
+	if (!parse_rgb(rgb_split, &r, &g, &b))
+	{
+		free_split(rgb_split);
 		return (-1);
+	}
+	free_split(rgb_split);
 	return ((r << 16) | (g << 8) | b);
 }
 

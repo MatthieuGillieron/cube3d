@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:45:11 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/29 09:03:44 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/29 09:47:39 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,20 @@ static int	try_load_image(const char *path, void *mlx)
 
 int	is_valid_texture(const char *path, void *mlx)
 {
-	int	fd;
+	int		fd;
+	char	*new_path;
 
-	fd = open(path, O_RDONLY);
+	new_path = ft_strtrim(path, " \t\n");
+	fd = open(new_path, O_RDONLY);
 	if (fd < 0)
 	{
 		write(2, "Error\nCannot open texture file\n", 32);
 		return (0);
 	}
 	close(fd);
-	if (!check_extension(path))
+	if (!check_extension(new_path))
 		return (0);
-	return (try_load_image(path, mlx));
+	return (try_load_image(new_path, mlx));
 }
 
 int	check_path(t_map_data *data, void *mlx_ptr)
@@ -72,11 +74,12 @@ int	check_path(t_map_data *data, void *mlx_ptr)
 
 int	check_file(char **files, t_map_data *map)
 {
-	void *mlx;
+	void	*mlx;
+
 	if (!split_sections(files, map))
 	{
 		printf("Error\nInvalid map format.\n");
-		//free_map_data(map);
+		free_map_data(map);
 		return (1);
 	}
 	if (!is_map_enclosed(map->map, &map->player))
@@ -88,13 +91,11 @@ int	check_file(char **files, t_map_data *map)
 	if (!check_path(map, mlx))
 	{
 		printf("Error\nInvalid texture paths.\n");
-		//free_map_data(&map);
+		free_map_data(map);
 		free(files);
 		return (1);
 	}
 	parse_colors(map);
 	assign_direction(&map->player);
-	print_map_data(map);
-	print_player(&map->player);
 	return (0);
 }

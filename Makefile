@@ -25,6 +25,7 @@ MLX_DIR     = mlx
 SRC_FILES   = main.c \
 				events/e_window.c \
 				init/i_game.c \
+				init/i_textures.c \
 				parsing/p_check_texture.c \
 				parsing/p_color.c \
 				parsing/p_file.c \
@@ -36,6 +37,7 @@ SRC_FILES   = main.c \
 				render/r_background.c \
 				render/r_wall.c \
 				render/r_loop.c \
+				render/r_textures.c \
 				utils/u_cleanup.c \
 				utils/u_dir_player.c \
 				print.c
