@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:45:11 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/29 09:47:39 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/29 16:20:30 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,25 @@ int	is_valid_texture(const char *path, void *mlx)
 {
 	int		fd;
 	char	*new_path;
+	int		result;
 
 	new_path = ft_strtrim(path, " \t\n");
 	fd = open(new_path, O_RDONLY);
 	if (fd < 0)
 	{
 		write(2, "Error\nCannot open texture file\n", 32);
+		free(new_path);
 		return (0);
 	}
 	close(fd);
 	if (!check_extension(new_path))
+	{
+		free(new_path);
 		return (0);
-	return (try_load_image(new_path, mlx));
+	}
+	result = try_load_image(new_path, mlx);
+	free(new_path);
+	return (result);
 }
 
 int	check_path(t_map_data *data, void *mlx_ptr)
