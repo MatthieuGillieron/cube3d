@@ -80,7 +80,10 @@ static int	perform_dda(t_game *game, t_ray_pos *pos, t_ray_dir *dir, int *side)
 			pos->map_y += dir->step_y;
 			*side = 1;
 		}
-		if (game->map[pos->map_y] && game->map[pos->map_y][pos->map_x] == '1')
+		if (pos->map_y < 0 || pos->map_x < 0 || !game->map[pos->map_y] || \
+			pos->map_x >= (int)ft_strlen(game->map[pos->map_y]))
+			hit = 1;
+		else if (game->map[pos->map_y][pos->map_x] == '1')
 			hit = 1;
 	}
 	return (hit);
