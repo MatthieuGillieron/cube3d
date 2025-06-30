@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:57:11 by mg                #+#    #+#             */
-/*   Updated: 2025/06/30 10:12:15 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/30 10:17:32 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,16 @@ static int	cell_is_walkable(char **map, int x, int y)
 	return (1);
 }
 
-static int	is_walkable(char **map, double x, double y)
+static int	check_area(char **map, t_bounds b)
 {
-	int	min_x;
-	int	max_x;
-	int	min_y;
-	int	max_y;
 	int	i;
+	int	j;
 
-	min_x = (int)(x - PLAYER_RADIUS);
-	max_x = (int)(x + PLAYER_RADIUS);
-	min_y = (int)(y - PLAYER_RADIUS);
-	max_y = (int)(y + PLAYER_RADIUS);
-	i = min_y;
-	while (i <= max_y)
+	i = b.min_y;
+	while (i <= b.max_y)
 	{
-		int	j;
-
-		j = min_x;
-		while (j <= max_x)
+		j = b.min_x;
+		while (j <= b.max_x)
 		{
 			if (!cell_is_walkable(map, j, i))
 				return (0);
@@ -61,6 +52,17 @@ static int	is_walkable(char **map, double x, double y)
 		i++;
 	}
 	return (1);
+}
+
+static int	is_walkable(char **map, double x, double y)
+{
+	t_bounds	b;
+
+	b.min_x = (int)(x - PLAYER_RADIUS);
+	b.max_x = (int)(x + PLAYER_RADIUS);
+	b.min_y = (int)(y - PLAYER_RADIUS);
+	b.max_y = (int)(y + PLAYER_RADIUS);
+	return (check_area(map, b));
 }
 
 void	move_forward(t_game *game)
