@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:06:51 by mg                #+#    #+#             */
-/*   Updated: 2025/06/29 17:47:05 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/30 09:18:43 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,27 @@ void	update_movement(t_game *game)
 		rotate_player(game, -1);
 	if (game->keys.right)
 		rotate_player(game, 1);
-	if (game->keys.rotate_left)
+	/*if (game->keys.rotate_left)
 		rotate_player(game, -1);
 	if (game->keys.rotate_right)
-		rotate_player(game, 1);
+		rotate_player(game, 1);*/
+}
+
+int	mouse_motion(int x, int y, t_game *game)
+{
+	static int	last_x = -1;
+	int			dx;
+
+	if (last_x != -1)
+	{
+		dx = x - last_x;
+		game->player.angle += dx * MOUSE_SENS;
+		if (game->player.angle >= 2 * M_PI)
+			game->player.angle -= 2 * M_PI;
+		if (game->player.angle < 0)
+			game->player.angle += 2 * M_PI;
+	}
+	last_x = x;
+	(void)y;
+	return (0);
 }

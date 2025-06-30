@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/29 17:39:45 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/30 09:19:53 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include "../mlx/mlx.h"
 
 # define FOV 1.0472
+# define MOVE_SPEED 0.03
+# define ROTATE_SPEED 0.025
+# define MOUSE_SENS 0.003
 //--------[ STRUCTURE ]----------
 typedef struct s_texture {
 	char	*no;
@@ -77,13 +80,13 @@ typedef struct s_textures
 }	t_textures;
 
 typedef struct s_key_state {
-	int forward;
-	int backward;
-	int left;
-	int right;
-	int rotate_left;
-	int rotate_right;
-} t_key_state;
+	int	forward;
+	int	backward;
+	int	left;
+	int	right;
+	int	rotate_left;
+	int	rotate_right;
+}	t_key_state;
 
 typedef struct s_game
 {
@@ -97,7 +100,7 @@ typedef struct s_game
 	t_player	player;
 	char		**map;
 	t_textures	textures;
-	t_key_state keys;
+	t_key_state	keys;
 }	t_game;
 
 typedef struct s_ray_pos
@@ -144,6 +147,7 @@ int			close_window(t_game *game);
 int			key_press(int keycode, t_game *game);
 int			key_release(int keycode, t_game *game);
 void		update_movement(t_game *game);
+int			mouse_motion(int x, int y, t_game *game);
 
 //-----------*** init ***------------------
 int			init_game(t_game *game);

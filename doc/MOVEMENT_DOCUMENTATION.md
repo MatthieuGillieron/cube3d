@@ -4,6 +4,8 @@
 
 Le système de mouvement de Cub3D utilise la **trigonométrie** pour calculer les déplacements du joueur dans un espace 2D. Le joueur peut se déplacer dans 4 directions et tourner sur lui-même.
 
+**NOUVEAU :** Le joueur peut aussi tourner en déplaçant la souris horizontalement (rotation fluide).
+
 ## Architecture
 
 ### Fichiers concernés
@@ -132,6 +134,7 @@ if (game->map[(int)new_y][(int)new_x] != '1')
 | ← | 123 | `rotate_player(-1)` | Tourner gauche |
 | → | 124 | `rotate_player(1)` | Tourner droite |
 | ESC | 53 | `close_window()` | Quitter |
+| **Souris** | - | `mouse_motion()` | **Tourner (horizontal)** |
 
 ### Gestionnaire d'événements
 ```c
