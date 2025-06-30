@@ -42,8 +42,10 @@ SRC_FILES   = main.c \
 				render/r_wall.c \
 				render/r_loop.c \
 				render/r_textures.c \
+				render/r_minimap.c \
 				utils/u_cleanup.c \
 				utils/u_dir_player.c \
+				utils/u_minimap.c \
 				print.c
 
 SRCS        = $(addprefix $(SRCDIR)/, $(SRC_FILES))

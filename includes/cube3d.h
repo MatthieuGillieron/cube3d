@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/30 09:19:53 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/30 10:01:58 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 # define MOVE_SPEED 0.03
 # define ROTATE_SPEED 0.025
 # define MOUSE_SENS 0.003
+# define MINIMAP_SCALE 5
+# define MINIMAP_MARGIN 16
+# define COLOR_WALL 0x444444
+# define COLOR_EMPTY 0xEEEEEE
+# define COLOR_BG 0x22222288
+# define COLOR_BORDER 0x888888
+# define COLOR_PLAYER 0x00CC66
+# define COLOR_DIR 0x0077FF
 //--------[ STRUCTURE ]----------
 typedef struct s_texture {
 	char	*no;
@@ -139,6 +147,33 @@ typedef struct s_draw_params {
 	int		tex_x;
 	int		line_height;
 }	t_draw_params;
+typedef struct s_line_params
+{
+	t_game			*game;
+	int				x0;
+	int				y0;
+	int				x1;
+	int				y1;
+	unsigned int	color;
+}	t_line_params;
+
+typedef struct s_minimap
+{
+	t_game	*game;
+	int		width;
+	int		height;
+	int		cell;
+	int		margin;
+}	t_minimap;
+
+typedef struct s_circle_params
+{
+	t_game			*game;
+	int				cx;
+	int				cy;
+	int				r;
+	unsigned int	color;
+}	t_circle_params;
 
 //-----------[ PROTOTYPES ]----------------
 
@@ -156,8 +191,8 @@ int			load_textures(t_game *game);
 //-----------*** movement ***--------------
 void		move_forward(t_game *game);
 void		move_backward(t_game *game);
-void		move_left(t_game *game);
-void		move_right(t_game *game);
+//void		move_left(t_game *game);
+//void		move_right(t_game *game);
 void		rotate_player(t_game *game, int direction);
 
 //-----------*** parsing ***---------------
@@ -187,10 +222,16 @@ void		draw_wall_slice(t_game *game, int x, \
 t_img		*get_wall_texture(t_game *game, \
 	t_ray_hit *hit, double ray_angle);
 int			get_texture_color(t_img *texture, int x, int y);
+void		render_minimap(t_game *game);
 
 //-----------*** utils ***-----------------
 void		free_map_data(t_map_data *data);
 void		assign_direction(t_player *player);
+void		draw_player_minimap(t_minimap *mm);
+void		draw_line(t_line_params *line);
+int			get_direction(int start, int end);
+void		draw_circle(t_circle_params *circle);
+void		draw_pixel(t_game *game, int x, int y, unsigned int color);	
 
 //------------*** TEST ***-----------------
 void		print_map_data(t_map_data *data);
