@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:44:03 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/29 15:14:56 by mg               ###   ########.fr       */
+/*   Updated: 2025/06/30 10:33:28 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,19 @@ void	print_color(t_color *col)
 
 void	print_map(char **map)
 {
+	int	i;
+
+	i = 0;
 	printf("Map:\n");
 	if (!map)
 	{
 		printf("  (null)\n");
 		return ;
 	}
-	for (int i = 0; map[i]; i++)
+	while (map[i])
 	{
 		printf("  %s\n", map[i]);
+		i++;
 	}
 }
 
