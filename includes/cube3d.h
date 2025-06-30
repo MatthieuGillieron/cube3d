@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/30 10:01:58 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/30 10:17:19 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define COLOR_BORDER 0x888888
 # define COLOR_PLAYER 0x00CC66
 # define COLOR_DIR 0x0077FF
+# define PLAYER_RADIUS 0.2
 //--------[ STRUCTURE ]----------
 typedef struct s_texture {
 	char	*no;
@@ -174,6 +175,14 @@ typedef struct s_circle_params
 	int				r;
 	unsigned int	color;
 }	t_circle_params;
+
+typedef struct s_bounds
+{
+	int	min_x;
+	int	max_x;
+	int	min_y;
+	int	max_y;
+}	t_bounds;
 
 //-----------[ PROTOTYPES ]----------------
 

@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:04 by mg                #+#    #+#             */
-/*   Updated: 2025/06/29 09:57:13 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/30 10:15:29 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ static void	set_step_side_dist(t_ray_pos *pos, t_ray_dir *dir)
 static void	init_ray_vars(t_game *game, double ray_angle,
 	t_ray_pos *pos, t_ray_dir *dir)
 {
-	pos->pos_x = (double)game->player.x + 0.5;
-	pos->pos_y = (double)game->player.y + 0.5;
-	pos->map_x = (int)pos->pos_x;
-	pos->map_y = (int)pos->pos_y;
 	dir->ray_dir_x = cos(ray_angle);
 	dir->ray_dir_y = sin(ray_angle);
+	pos->pos_x = (double)game->player.x + dir->ray_dir_x * PLAYER_RADIUS;
+	pos->pos_y = (double)game->player.y + dir->ray_dir_y * PLAYER_RADIUS;
+	pos->map_x = (int)pos->pos_x;
+	pos->map_y = (int)pos->pos_y;
 	set_dir_delta(dir);
 	set_step_side_dist(pos, dir);
 }
