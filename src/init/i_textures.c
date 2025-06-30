@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:35:38 by mg                #+#    #+#             */
-/*   Updated: 2025/06/29 10:00:25 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/30 10:27:01 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,6 @@ static int	load_single_texture(t_game *game, t_img *texture, char *path)
 
 int	load_textures(t_game *game)
 {
-	printf("Loading textures...\n");
-	printf("NO: %s\n", game->map_data.textures.no);
-	printf("SO: %s\n", game->map_data.textures.so);
-	printf("EA: %s\n", game->map_data.textures.ea);
-	printf("WE: %s\n", game->map_data.textures.we);
 	if (!load_single_texture(game, &game->textures.north, \
 		game->map_data.textures.no))
 		return (0);
@@ -69,6 +64,5 @@ int	load_textures(t_game *game)
 	if (!load_single_texture(game, &game->textures.west, \
 		game->map_data.textures.we))
 		return (0);
-	printf("All textures loaded successfully!\n");
 	return (1);
 }
