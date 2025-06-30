@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/30 10:17:19 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/30 17:36:39 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../libft/libft.h"
 # include <stdio.h> 
 # include <math.h>
+# include <float.h>
 # include "../mlx/mlx.h"
 
 # define FOV 1.0472
@@ -110,6 +111,7 @@ typedef struct s_game
 	char		**map;
 	t_textures	textures;
 	t_key_state	keys;
+	int			collision_active;
 }	t_game;
 
 typedef struct s_ray_pos
@@ -184,6 +186,17 @@ typedef struct s_bounds
 	int	max_y;
 }	t_bounds;
 
+typedef struct s_walkable
+{
+	char		**map;
+	double		cx;
+	double		cy;
+	double		best_dist;
+	double		best_x;
+	double		best_y;
+	int			found;
+}	t_walkable;
+
 //-----------[ PROTOTYPES ]----------------
 
 //-----------*** events ***----------------
@@ -241,6 +254,10 @@ void		draw_line(t_line_params *line);
 int			get_direction(int start, int end);
 void		draw_circle(t_circle_params *circle);
 void		draw_pixel(t_game *game, int x, int y, unsigned int color);	
+void		update_best_position(t_walkable *w, double r);
+int			is_walkable(char **map, double x, double y);
+int			check_area(char **map, t_bounds b);
+int			cell_is_walkable(char **map, int x, int y);
 
 //------------*** TEST ***-----------------
 void		print_map_data(t_map_data *data);
