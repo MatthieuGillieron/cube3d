@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:43:53 by mg                #+#    #+#             */
-/*   Updated: 2025/06/29 17:39:45 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/06/30 09:37:39 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	render_loop(void *param)
 		draw_wall_slice(game, x, &hit, ray_angle);
 		x++;
 	}
+	render_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	mlx_destroy_image(game->mlx, game->img.img);
 	return (0);
