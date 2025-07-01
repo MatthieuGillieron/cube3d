@@ -17,6 +17,7 @@ int	init_game(t_game *game)
 	game->win_w = 640;
 	game->win_h = 480;
 	game->map = game->map_data.map;
+	game->collision_active = 0;
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (0);
