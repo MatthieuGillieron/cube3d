@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/30 17:36:39 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/01 09:23:27 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,25 @@
 # define COLOR_PLAYER 0x00CC66
 # define COLOR_DIR 0x0077FF
 # define PLAYER_RADIUS 0.2
+
+# ifdef __linux__
+#  define KEY_W 119
+#  define KEY_S 115
+#  define KEY_A 97
+#  define KEY_D 100
+#  define KEY_LEFT 65361
+#  define KEY_RIGHT 65363
+#  define KEY_ESC 65307
+# else
+#  define KEY_W 13
+#  define KEY_S 1
+#  define KEY_A 0
+#  define KEY_D 2
+#  define KEY_LEFT 123
+#  define KEY_RIGHT 124
+#  define KEY_ESC 53
+# endif
+
 //--------[ STRUCTURE ]----------
 typedef struct s_texture {
 	char	*no;

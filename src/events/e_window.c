@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:06:51 by mg                #+#    #+#             */
-/*   Updated: 2025/06/30 10:32:24 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/01 09:23:53 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,32 @@ int	close_window(t_game *game)
 
 int	key_press(int keycode, t_game *game)
 {
-	if (keycode == 53)
+	if (keycode == KEY_ESC)
 		close_window(game);
-	else if (keycode == 13)
+	else if (keycode == KEY_W)
 		game->keys.forward = 1;
-	else if (keycode == 1)
+	else if (keycode == KEY_S)
 		game->keys.backward = 1;
-	else if (keycode == 0)
+	else if (keycode == KEY_A)
 		game->keys.left = 1;
-	else if (keycode == 2)
+	else if (keycode == KEY_D)
 		game->keys.right = 1;
+	else if (keycode == KEY_LEFT)
+		game->keys.rotate_left = 1;
+	else if (keycode == KEY_RIGHT)
+		game->keys.rotate_right = 1;
 	return (0);
 }
 
 int	key_release(int keycode, t_game *game)
 {
-	if (keycode == 13)
+	if (keycode == KEY_W)
 		game->keys.forward = 0;
-	else if (keycode == 1)
+	else if (keycode == KEY_S)
 		game->keys.backward = 0;
-	else if (keycode == 0)
+	else if (keycode == KEY_A)
 		game->keys.left = 0;
-	else if (keycode == 2)
+	else if (keycode == KEY_D)
 		game->keys.right = 0;
 	return (0);
 }
