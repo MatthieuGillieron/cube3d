@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   r_textures.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 10:09:38 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/29 10:10:10 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/01 14:45:49 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
 
-t_img	*get_wall_texture(t_game *game, \
+t_img	*get_wall_texture(t_game *game,
 	t_ray_hit *hit, double ray_angle)
 {
 	while (ray_angle < 0)
