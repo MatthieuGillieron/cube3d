@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   i_textures.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:35:38 by mg                #+#    #+#             */
-/*   Updated: 2025/06/30 10:27:01 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/01 14:40:38 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ static int	load_single_texture(t_game *game, t_img *texture, char *path)
 
 int	load_textures(t_game *game)
 {
-	if (!load_single_texture(game, &game->textures.north, \
-		game->map_data.textures.no))
+	if (!load_single_texture(game, &game->textures.north,
+			game->map_data.textures.no))
 		return (0);
-	if (!load_single_texture(game, &game->textures.south, \
-		game->map_data.textures.so))
+	if (!load_single_texture(game, &game->textures.south,
+			game->map_data.textures.so))
 		return (0);
-	if (!load_single_texture(game, &game->textures.east, \
-		game->map_data.textures.ea))
+	if (!load_single_texture(game, &game->textures.east,
+			game->map_data.textures.ea))
 		return (0);
-	if (!load_single_texture(game, &game->textures.west, \
-		game->map_data.textures.we))
+	if (!load_single_texture(game, &game->textures.west,
+			game->map_data.textures.we))
 		return (0);
 	return (1);
 }
