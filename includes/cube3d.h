@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/07/01 09:59:58 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/01 11:00:18 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,12 +272,13 @@ void		draw_player_minimap(t_minimap *mm);
 void		draw_line(t_line_params *line);
 int			get_direction(int start, int end);
 void		draw_circle(t_circle_params *circle);
-void		draw_pixel(t_game *game, int x, int y, unsigned int color);	
+void		draw_pixel(t_game *game, int x, int y, unsigned int color);
 void		update_best_position(t_walkable *w, double r);
 int			is_walkable(char **map, double x, double y);
 int			check_area(char **map, t_bounds b);
 int			cell_is_walkable(char **map, int x, int y);
 void		calc_map_size(char **map, int *width, int *height);
+
 //------------*** TEST ***-----------------
 void		print_map_data(t_map_data *data);
 void		print_player(t_player *player);

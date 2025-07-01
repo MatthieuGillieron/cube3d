@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   u_map_size.c                                       :+:      :+:    :+:   */
+/*   u_free.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 10:01:20 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/07/01 10:02:11 by maximemarti      ###   ########.fr       */
+/*   Created: 2025/06/23 17:07:01 by maximemarti       #+#    #+#             */
+/*   Updated: 2025/06/24 08:35:57 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
 
-void	calc_map_size(char **map, int *width, int *height)
+void	free_map_data(t_map_data *data)
 {
 	int	i;
-	int	w;
-	int	last_nonspace;
 
-	*width = 0;
-	*height = 0;
-	if (!map)
-		return ;
 	i = 0;
-	while (map[i])
+	free(data->textures.no);
+	free(data->textures.so);
+	free(data->textures.we);
+	free(data->textures.ea);
+	free(data->colors.floor);
+	free(data->colors.ceiling);
+	if (data->map)
 	{
-		w = 0;
-		last_nonspace = -1;
-		while (map[i][w])
-		{
-			if (map[i][w] != ' ' && map[i][w] != '\n')
-				last_nonspace = w;
-			w++;
-		}
-		if (last_nonspace + 1 > *width)
-			*width = last_nonspace + 1;
-		i++;
+		while (data->map[i])
+			free(data->map[i++]);
+		free(data->map);
 	}
-	*height = i;
 }
