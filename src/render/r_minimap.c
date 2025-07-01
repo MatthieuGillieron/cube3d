@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 09:49:23 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/30 10:00:37 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/01 10:03:03 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,38 @@ static void	draw_minimap_cell(t_minimap *mm, int map_x, int map_y, \
 	}
 }
 
+static void	draw_single_minimap_cell(t_minimap *mm, int x, int y)
+{
+	unsigned int	color;
+	int				row_len;
+
+	row_len = ft_strlen(mm->game->map[y]);
+	if (x < row_len)
+	{
+		if (mm->game->map[y][x] == '1')
+			color = COLOR_WALL;
+		else if (mm->game->map[y][x] == '0')
+			color = COLOR_EMPTY;
+		else
+			color = COLOR_WALL;
+	}
+	else
+		color = COLOR_WALL;
+	draw_minimap_cell(mm, x, y, color);
+}
+
 static void	draw_minimap_cells(t_minimap *mm)
 {
-	int				map_y;
-	int				map_x;
-	unsigned int	color;
+	int	map_y;
+	int	map_x;
 
 	map_y = 0;
 	while (mm->game->map[map_y])
 	{
 		map_x = 0;
-		while (mm->game->map[map_y][map_x])
+		while (map_x < mm->width)
 		{
-			if (mm->game->map[map_y][map_x] == '1')
-				color = COLOR_WALL;
-			else
-				color = COLOR_EMPTY;
-			draw_minimap_cell(mm, map_x, map_y, color);
+			draw_single_minimap_cell(mm, map_x, map_y);
 			map_x++;
 		}
 		map_y++;
@@ -67,16 +82,14 @@ static void	draw_minimap_background(t_minimap *mm)
 
 	mm_w = mm->width * mm->cell;
 	mm_h = mm->height * mm->cell;
-	py = -2;
-	while (py < mm_h + 2)
+	py = -1;
+	while (py < mm_h + 1)
 	{
-		px = -2;
-		while (px < mm_w + 2)
+		px = -1;
+		while (px < mm_w + 1)
 		{
 			x = mm->margin + px;
-			if (px == -2 || px == mm_w + 1 || py == -2 || py == mm_h + 1)
-				draw_pixel(mm->game, x, mm->margin + py, COLOR_BORDER);
-			else if (px == -1 || px == mm_w || py == -1 || py == mm_h)
+			if (px == -1 || px == mm_w || py == -1 || py == mm_h)
 				draw_pixel(mm->game, x, mm->margin + py, COLOR_BORDER);
 			else
 				draw_pixel(mm->game, x, mm->margin + py, COLOR_BG);
@@ -84,28 +97,6 @@ static void	draw_minimap_background(t_minimap *mm)
 		}
 		py++;
 	}
-}
-
-static void	calc_map_size(char **map, int *width, int *height)
-{
-	int	i;
-	int	w;
-
-	*width = 0;
-	*height = 0;
-	if (!map)
-		return ;
-	i = 0;
-	while (map[i])
-	{
-		w = 0;
-		while (map[i][w])
-			w++;
-		if (w > *width)
-			*width = w;
-		i++;
-	}
-	*height = i;
 }
 
 void	render_minimap(t_game *game)

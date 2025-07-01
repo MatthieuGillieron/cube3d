@@ -46,6 +46,7 @@ SRC_FILES   = main.c \
 				utils/u_dir_player.c \
 				utils/u_minimap.c \
 				utils/u_move_player.c \
+				utils/u_map_size.c \
 				print.c
 
 SRCS        = $(addprefix $(SRCDIR)/, $(SRC_FILES))
