@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_cast.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:04 by mg                #+#    #+#             */
-/*   Updated: 2025/06/30 10:15:29 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/01 14:43:05 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ static int	perform_dda(t_game *game, t_ray_pos *pos, t_ray_dir *dir, int *side)
 			pos->map_y += dir->step_y;
 			*side = 1;
 		}
-		if (pos->map_y < 0 || pos->map_x < 0 || !game->map[pos->map_y] || \
-			pos->map_x >= (int)ft_strlen(game->map[pos->map_y]))
+		if (pos->map_y < 0 || pos->map_x < 0 || !game->map[pos->map_y]
+			|| pos->map_x >= (int)ft_strlen(game->map[pos->map_y]))
 			hit = 1;
 		else if (game->map[pos->map_y][pos->map_x] == '1')
 			hit = 1;
@@ -99,11 +99,11 @@ t_ray_hit	cast_ray(t_game *game, double ray_angle)
 	init_ray_vars(game, ray_angle, &pos, &dir);
 	perform_dda(game, &pos, &dir, &side);
 	if (side == 0)
-		hit.distance = (pos.map_x - pos.pos_x + \
-			(1 - dir.step_x) / 2) / dir.ray_dir_x;
+		hit.distance = (pos.map_x - pos.pos_x
+				+ (1 - dir.step_x) / 2) / dir.ray_dir_x;
 	else
-		hit.distance = (pos.map_y - pos.pos_y + \
-			(1 - dir.step_y) / 2) / dir.ray_dir_y;
+		hit.distance = (pos.map_y - pos.pos_y
+				+ (1 - dir.step_y) / 2) / dir.ray_dir_y;
 	if (side == 0)
 		hit.wall_x = pos.pos_y + hit.distance * dir.ray_dir_y;
 	else
