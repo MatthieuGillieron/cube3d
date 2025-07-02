@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   r_minimap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 09:49:23 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/07/01 11:35:21 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/02 09:05:17 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
 
-static void	draw_minimap_cell(t_minimap *mm, int map_x, int map_y, \
+static void	draw_minimap_cell(t_minimap *mm, int map_x, int map_y,
 			unsigned int color)
 {
 	int	px;

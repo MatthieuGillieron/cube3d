@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   m_move_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:57:11 by mg                #+#    #+#             */
-/*   Updated: 2025/07/01 11:39:12 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/02 09:06:38 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ void	move_forward(t_game *game)
 		move_player_no_collision(game, new_x, new_y, &moved);
 	else
 	{
-		if (is_walkable(game->map, new_x, game->player.y) \
-		&& game->map[(int)game->player.y][(int)new_x] != '1')
+		if (is_walkable(game->map, new_x, game->player.y)
+			&& game->map[(int)game->player.y][(int)new_x] != '1')
 			game->player.x = new_x;
-		if (is_walkable(game->map, game->player.x, new_y) \
-		&& game->map[(int)new_y][(int)game->player.x] != '1')
+		if (is_walkable(game->map, game->player.x, new_y)
+			&& game->map[(int)new_y][(int)game->player.x] != '1')
 			game->player.y = new_y;
 	}
 	if (moved)
@@ -120,11 +120,11 @@ void	move_backward(t_game *game)
 		move_player_no_collision_back(game, new_x, new_y, &moved);
 	else
 	{
-		if (is_walkable(game->map, new_x, game->player.y) \
-		&& game->map[(int)game->player.y][(int)new_x] != '1')
+		if (is_walkable(game->map, new_x, game->player.y)
+			&& game->map[(int)game->player.y][(int)new_x] != '1')
 			game->player.x = new_x;
-		if (is_walkable(game->map, game->player.x, new_y) \
-		&& game->map[(int)new_y][(int)game->player.x] != '1')
+		if (is_walkable(game->map, game->player.x, new_y)
+			&& game->map[(int)new_y][(int)game->player.x] != '1')
 			game->player.y = new_y;
 	}
 	if (moved)

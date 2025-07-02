@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_wall.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:43:06 by mg                #+#    #+#             */
-/*   Updated: 2025/06/29 10:10:54 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/02 09:03:01 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	draw_wall_column(t_game *game, t_img *texture, t_draw_params *dp)
 	{
 		tex_y = (int)tex_pos & (texture->height - 1);
 		tex_pos += step;
-		dst = game->img.addr + \
-		(y * game->img.line_len + dp->x * (game->img.bpp / 8));
+		dst = game->img.addr
+			+ (y * game->img.line_len + dp->x * (game->img.bpp / 8));
 		*(unsigned int *)dst = get_texture_color(texture, dp->tex_x, tex_y);
 		y++;
 	}

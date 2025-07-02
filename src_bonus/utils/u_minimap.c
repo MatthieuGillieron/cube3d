@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   u_minimap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 09:54:13 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/07/01 11:36:17 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/02 09:05:39 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	draw_circle(t_circle_params *circle)
 		while (x <= circle->r)
 		{
 			if (x * x + y * y <= circle->r * circle->r)
-				draw_pixel(circle->game, circle->cx + x, circle->cy + \
-				y, circle->color);
+				draw_pixel(circle->game, circle->cx + x, circle->cy
+					+ y, circle->color);
 			x++;
 		}
 		y++;

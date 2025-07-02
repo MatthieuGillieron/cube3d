@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:41:16 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/29 16:22:26 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/02 09:10:18 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int	find_map_start(char **lines, int i)
 
 int	is_data_complete(t_map_data *data)
 {
-	return (data->textures.no && data->textures.so && \
-		data->textures.we && data->textures.ea && \
-		data->colors.floor && data->colors.ceiling && \
-		data->map && data->map[0]);
+	return (data->textures.no && data->textures.so
+		&& data->textures.we && data->textures.ea
+		&& data->colors.floor && data->colors.ceiling
+		&& data->map && data->map[0]);
 }
 
 int	copy_map(char **lines, t_map_data *data, int start)
