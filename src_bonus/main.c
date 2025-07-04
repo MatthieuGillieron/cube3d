@@ -6,11 +6,41 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/07/01 11:33:44 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 12:31:06 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
+
+static void	check_args(int ac, char **av)
+{
+	int	len;
+
+	if (ac != 2)
+	{
+		printf("Error\nUsage: %s <map_file.cub>\n", av[0]);
+		exit(1);
+	}
+	len = ft_strlen(av[1]);
+	if (len < 4 || ft_strncmp(av[1] + len - 4, ".cub", 4) != 0)
+	{
+		printf("Error\nInvalid map extension\n");
+		exit(1);
+	}
+}
+
+static char	**load_map_file(char *path)
+{
+	char	**files;
+
+	files = open_map(path);
+	if (!files)
+	{
+		printf("Error\nCannot open map file: %s\n", path);
+		exit(1);
+	}
+	return (files);
+}
 
 void	game_setup(int ac, char **av, t_game *game)
 {
@@ -19,11 +49,8 @@ void	game_setup(int ac, char **av, t_game *game)
 
 	ft_bzero(&map, sizeof(map));
 	ft_bzero(game, sizeof(*game));
-	if (ac != 2)
-		exit(1);
-	files = open_map(av[1]);
-	if (!files)
-		exit(1);
+	check_args(ac, av);
+	files = load_map_file(av[1]);
 	if (check_file(files, &map))
 		exit(1);
 	game->map_data = map;
@@ -32,7 +59,10 @@ void	game_setup(int ac, char **av, t_game *game)
 	game->player = map.player;
 	game->map = map.map;
 	if (!init_game(game))
+	{
+		printf("Error\nFailed to initialize graphics or window.\n");
 		exit(1);
+	}
 }
 
 void	game_loop(t_game *game)

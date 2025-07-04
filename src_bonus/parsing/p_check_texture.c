@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:45:11 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/29 16:20:30 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 12:00:24 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	check_path(t_map_data *data, void *mlx_ptr)
 	if (!is_valid_texture(data->textures.we, mlx_ptr))
 		return (0);
 	if (!is_valid_texture(data->textures.ea, mlx_ptr))
+		return (0);
+	if (!is_valid_texture(data->textures.do_, mlx_ptr))
 		return (0);
 	return (1);
 }

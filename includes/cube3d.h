@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/07/01 11:00:18 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 12:20:57 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 #  define KEY_LEFT 65361
 #  define KEY_RIGHT 65363
 #  define KEY_ESC 65307
+#  define KEY_SPACE 32
 # else
 #  define KEY_W 13
 #  define KEY_S 1
@@ -51,6 +52,7 @@
 #  define KEY_LEFT 123
 #  define KEY_RIGHT 124
 #  define KEY_ESC 53
+#  define KEY_SPACE 49
 # endif
 
 //--------[ STRUCTURE ]----------
@@ -59,6 +61,7 @@ typedef struct s_texture {
 	char	*so;
 	char	*we;
 	char	*ea;
+	char	*do_;
 }	t_texture;
 
 typedef struct s_color {
@@ -106,6 +109,7 @@ typedef struct s_textures
 	t_img	south;
 	t_img	east;
 	t_img	west;
+	t_img	door;
 }	t_textures;
 
 typedef struct s_key_state {
@@ -188,6 +192,12 @@ typedef struct s_minimap
 	int		margin;
 }	t_minimap;
 
+typedef struct s_validation_ctx
+{
+	char		**map;
+	t_map_check	*info;
+}	t_validation_ctx;
+
 typedef struct s_circle_params
 {
 	t_game			*game;
@@ -235,7 +245,10 @@ void		move_backward(t_game *game);
 //void		move_left(t_game *game);
 //void		move_right(t_game *game);
 void		rotate_player(t_game *game, int direction);
-
+void		move_player_no_collision(t_game *game, \
+	double new_x, double new_y, double *moved);
+void		move_player_no_collision_back(t_game *game, \
+		double new_x, double new_y, double *moved);
 //-----------*** parsing ***---------------
 char		**open_map(char *map);
 int			split_sections(char **lines, t_map_data *data);
@@ -278,6 +291,8 @@ int			is_walkable(char **map, double x, double y);
 int			check_area(char **map, t_bounds b);
 int			cell_is_walkable(char **map, int x, int y);
 void		calc_map_size(char **map, int *width, int *height);
+int			is_valid_surrounding(char **map, int y, int x);
+int			get_map_width(char *row);
 
 //------------*** TEST ***-----------------
 void		print_map_data(t_map_data *data);

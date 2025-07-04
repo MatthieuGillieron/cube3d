@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 17:23:26 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 20:20:16 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 10:54:20 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	check_header_lines(char **lines, t_map_data *data, int *index)
 
 	found = 0;
 	i = 0;
-	while (lines[i] != NULL && found < 6)
+	while (lines[i] != NULL && found < 7)
 	{
 		if (is_line_empty(lines[i]))
 		{
@@ -53,7 +53,7 @@ static int	check_header_lines(char **lines, t_map_data *data, int *index)
 		i++;
 	}
 	*index = i;
-	return (found == 6);
+	return (found == 7);
 }
 
 static int	check_blank_lines_between(char **lines, int start, int end)

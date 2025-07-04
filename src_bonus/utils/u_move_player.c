@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 17:34:42 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/30 17:36:49 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 12:20:39 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,40 @@ int	cell_is_walkable(char **map, int x, int y)
 		map_w++;
 	if (x < 0 || x >= map_w)
 		return (0);
-	if (map[y][x] == '1')
+	if (map[y][x] == '1' || map[y][x] == 'D')
 		return (0);
 	return (1);
+}
+
+static int	get_map_height(char **map)
+{
+	int	h;
+
+	h = 0;
+	while (map[h])
+		h++;
+	return (h);
 }
 
 int	check_area(char **map, t_bounds b)
 {
 	int	i;
 	int	j;
+	int	map_h;
+	int	map_w;
 
+	map_h = get_map_height(map);
 	i = b.min_y;
 	while (i <= b.max_y)
 	{
+		if (i < 0 || i >= map_h)
+			return (0);
+		map_w = get_map_width(map[i]);
 		j = b.min_x;
 		while (j <= b.max_x)
 		{
+			if (j < 0 || j >= map_w)
+				return (0);
 			if (!cell_is_walkable(map, j, i))
 				return (0);
 			j++;

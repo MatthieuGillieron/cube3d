@@ -6,16 +6,41 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:06:51 by mg                #+#    #+#             */
-/*   Updated: 2025/07/01 09:23:53 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 12:14:01 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
 
-int	close_window(t_game *game)
+static void	get_facing_tile_coords(t_game *game, int *tx, int *ty)
 {
-	mlx_destroy_window(game->mlx, game->win);
-	exit(0);
+	int		px;
+	int		py;
+	double	angle;
+	int		dx;
+	int		dy;
+
+	px = (int)game->player.x;
+	py = (int)game->player.y;
+	angle = game->player.angle;
+	dx = (int)round(cos(angle));
+	dy = (int)round(sin(angle));
+	*tx = px + dx;
+	*ty = py + dy;
+}
+
+static void	try_open_door(t_game *game)
+{
+	int	tx;
+	int	ty;
+
+	get_facing_tile_coords(game, &tx, &ty);
+	if (ty >= 0 && tx >= 0 && game->map[ty] && \
+		tx < (int)ft_strlen(game->map[ty]))
+	{
+		if (game->map[ty][tx] == 'D')
+			game->map[ty][tx] = '0';
+	}
 }
 
 int	key_press(int keycode, t_game *game)
@@ -34,6 +59,8 @@ int	key_press(int keycode, t_game *game)
 		game->keys.rotate_left = 1;
 	else if (keycode == KEY_RIGHT)
 		game->keys.rotate_right = 1;
+	else if (keycode == KEY_SPACE)
+		try_open_door(game);
 	return (0);
 }
 
@@ -60,23 +87,4 @@ void	update_movement(t_game *game)
 		rotate_player(game, -1);
 	if (game->keys.right)
 		rotate_player(game, 1);
-}
-
-int	mouse_motion(int x, int y, t_game *game)
-{
-	static int	last_x = -1;
-	int			dx;
-
-	if (last_x != -1)
-	{
-		dx = x - last_x;
-		game->player.angle += dx * MOUSE_SENS;
-		if (game->player.angle >= 2 * M_PI)
-			game->player.angle -= 2 * M_PI;
-		if (game->player.angle < 0)
-			game->player.angle += 2 * M_PI;
-	}
-	last_x = x;
-	(void)y;
-	return (0);
 }

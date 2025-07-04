@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_assign_map.c                                     :+:      :+:    :+:   */
+/*   p_texture.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:55:25 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 08:35:42 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 12:02:42 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,19 @@ static	int	assign_floor_ceiling(char *line, t_map_data *data, int *found)
 	return (0);
 }
 
+static int	assign_door(char *line, t_map_data *data, int *found)
+{
+	if (ft_strncmp(line, "DO ", 3) == 0 && !data->textures.do_)
+	{
+		data->textures.do_ = ft_strdup(line + 3);
+		if (!data->textures.do_)
+			return (0);
+		(*found)++;
+		return (1);
+	}
+	return (0);
+}
+
 int	assign_texture_or_color(char *line, t_map_data *data, int *found)
 {
 	if (assign_north_south(line, data, found))
@@ -82,6 +95,8 @@ int	assign_texture_or_color(char *line, t_map_data *data, int *found)
 	if (assign_west_east(line, data, found))
 		return (1);
 	if (assign_floor_ceiling(line, data, found))
+		return (1);
+	if (assign_door(line, data, found))
 		return (1);
 	return (0);
 }

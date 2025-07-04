@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_map.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 08:41:16 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/07/02 09:10:18 by mg               ###   ########.fr       */
+/*   Updated: 2025/07/04 12:01:58 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	is_data_complete(t_map_data *data)
 {
 	return (data->textures.no && data->textures.so
 		&& data->textures.we && data->textures.ea
-		&& data->colors.floor && data->colors.ceiling
+		&& data->textures.do_ && data->colors.floor && data->colors.ceiling
 		&& data->map && data->map[0]);
 }
 

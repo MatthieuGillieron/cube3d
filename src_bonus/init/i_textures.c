@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   i_textures.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:35:38 by mg                #+#    #+#             */
-/*   Updated: 2025/07/02 08:58:17 by mg               ###   ########.fr       */
+/*   Updated: 2025/07/04 10:48:56 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ int	load_textures(t_game *game)
 		return (0);
 	if (!load_single_texture(game, &game->textures.west,
 			game->map_data.textures.we))
+		return (0);
+	if (!load_single_texture(game, &game->textures.door,
+			game->map_data.textures.do_))
 		return (0);
 	return (1);
 }
