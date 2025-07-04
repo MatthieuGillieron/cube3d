@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_minimap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 09:49:23 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/07/02 09:05:17 by mg               ###   ########.fr       */
+/*   Updated: 2025/07/04 10:49:29 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	draw_single_minimap_cell(t_minimap *mm, int x, int y)
 			color = COLOR_WALL;
 		else if (mm->game->map[y][x] == '0')
 			color = COLOR_EMPTY;
+		else if (mm->game->map[y][x] == 'D')
+			color = 0xAA8800;
 		else
 			color = COLOR_WALL;
 	}

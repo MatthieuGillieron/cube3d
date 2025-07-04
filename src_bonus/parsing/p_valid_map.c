@@ -1,39 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_map_ok.c                                         :+:      :+:    :+:   */
+/*   p_valid_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 17:27:39 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/06/24 09:58:07 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 12:11:11 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
-
-int	is_valid_surrounding(char **map, int y, int x)
-{
-	int	len_up;
-	int	len_down;
-	int	len_curr;
-
-	if (!is_playable(map[y][x]))
-		return (1);
-	if (y == 0 || x == 0)
-		return (0);
-	if (!map[y - 1] || !map[y + 1])
-		return (0);
-	len_curr = ft_strlen(map[y]);
-	len_up = ft_strlen(map[y - 1]);
-	len_down = ft_strlen(map[y + 1]);
-	if (x >= len_curr || x >= len_up || x >= len_down)
-		return (0);
-	if (map[y - 1][x] == ' ' || map[y + 1][x] == ' ' ||
-		map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
-		return (0);
-	return (1);
-}
 
 static int	check_line(char *line, int *last_playable)
 {
@@ -50,32 +27,58 @@ static int	check_line(char *line, int *last_playable)
 	return (i);
 }
 
-static int	check_map_line(char *line, int y, char **map, t_map_check *info)
+static int	validate_map_content(char *line, int y, int len_line, \
+	t_validation_ctx *ctx)
 {
 	int	j;
-	int	len_line;
-	int	last_index;
 
-	len_line = check_line(line, &last_index);
 	j = 0;
 	while (j < len_line)
 	{
+		if (!is_playable(line[j]) && (line[j] != '1' \
+			&& line[j] != 'D' && line[j] != '\n'))
+		{
+			printf("Error\nUnknown map symbol: %c at line %d, col %d\n",
+				line[j], y + 1, j + 1);
+			return (0);
+		}
 		if (is_player(line[j]))
 		{
-			info->player_count++;
-			info->player->x = j;
-			info->player->y = y;
-			info->player->direction = line[j];
+			ctx->info->player_count++;
+			ctx->info->player->x = j;
+			ctx->info->player->y = y;
+			ctx->info->player->direction = line[j];
 		}
-		if (!is_valid_surrounding(map, y, j))
+		if (!is_valid_surrounding(ctx->map, y, j))
 			return (0);
 		j++;
 	}
+	return (1);
+}
+
+static int	validate_line_end(char *line, int len_line, int last_index)
+{
 	if (last_index >= 0)
 	{
 		if (last_index + 1 >= len_line || line[last_index + 1] != '1')
 			return (0);
 	}
+	return (1);
+}
+
+static int	check_map_line(char *line, int y, char **map, t_map_check *info)
+{
+	int					len_line;
+	int					last_index;
+	t_validation_ctx	ctx;
+
+	ctx.map = map;
+	ctx.info = info;
+	len_line = check_line(line, &last_index);
+	if (!validate_map_content(line, y, len_line, &ctx))
+		return (0);
+	if (!validate_line_end(line, len_line, last_index))
+		return (0);
 	return (1);
 }
 
