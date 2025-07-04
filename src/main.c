@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:15:08 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/07/04 12:32:04 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 12:38:01 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	game_setup(int ac, char **av, t_game *game)
 	ft_bzero(game, sizeof(*game));
 	validate_args(ac, av);
 	files = load_and_check_map(av[1], &map);
+	if (!files)
+		return ;
 	game->map_data = map;
 	game->color.set_floor = map.colors.set_floor;
 	game->color.set_ceiling = map.colors.set_ceiling;
