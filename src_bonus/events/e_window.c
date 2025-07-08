@@ -6,13 +6,13 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:06:51 by mg                #+#    #+#             */
-/*   Updated: 2025/07/08 14:41:00 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/08 14:43:01 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
 
-int	close_window(t_game *game)
+static void	get_facing_tile_coords(t_game *game, int *tx, int *ty)
 {
 	if (game->textures.north.img)
 		mlx_destroy_image(game->mlx, game->textures.north.img);
@@ -46,6 +46,8 @@ int	key_press(int keycode, t_game *game)
 		game->keys.rotate_left = 1;
 	else if (keycode == KEY_RIGHT)
 		game->keys.rotate_right = 1;
+	else if (keycode == KEY_SPACE)
+		try_open_door(game);
 	return (0);
 }
 
@@ -72,23 +74,4 @@ void	update_movement(t_game *game)
 		rotate_player(game, -1);
 	if (game->keys.right)
 		rotate_player(game, 1);
-}
-
-int	mouse_motion(int x, int y, t_game *game)
-{
-	static int	last_x = -1;
-	int			dx;
-
-	if (last_x != -1)
-	{
-		dx = x - last_x;
-		game->player.angle += dx * MOUSE_SENS;
-		if (game->player.angle >= 2 * M_PI)
-			game->player.angle -= 2 * M_PI;
-		if (game->player.angle < 0)
-			game->player.angle += 2 * M_PI;
-	}
-	last_x = x;
-	(void)y;
-	return (0);
 }

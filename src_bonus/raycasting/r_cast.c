@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   r_cast.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:04 by mg                #+#    #+#             */
-/*   Updated: 2025/07/02 09:04:42 by mg               ###   ########.fr       */
+/*   Updated: 2025/07/04 11:48:17 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ static int	perform_dda(t_game *game, t_ray_pos *pos, t_ray_dir *dir, int *side)
 		if (pos->map_y < 0 || pos->map_x < 0 || !game->map[pos->map_y]
 			|| pos->map_x >= (int)ft_strlen(game->map[pos->map_y]))
 			hit = 1;
-		else if (game->map[pos->map_y][pos->map_x] == '1')
+		else if (game->map[pos->map_y][pos->map_x] == '1' || \
+			game->map[pos->map_y][pos->map_x] == 'D')
 			hit = 1;
 	}
 	return (hit);

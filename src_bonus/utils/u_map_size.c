@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:01:20 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/07/01 11:37:36 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 12:21:05 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,14 @@ void	calc_map_size(char **map, int *width, int *height)
 		i++;
 	}
 	*height = i;
+}
+
+int	get_map_width(char *row)
+{
+	int	w;
+
+	w = 0;
+	while (row[w])
+		w++;
+	return (w);
 }
