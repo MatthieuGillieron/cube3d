@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:06:51 by mg                #+#    #+#             */
-/*   Updated: 2025/07/01 09:23:53 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/08 14:41:00 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,19 @@
 
 int	close_window(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->win);
+	if (game->textures.north.img)
+		mlx_destroy_image(game->mlx, game->textures.north.img);
+	if (game->textures.south.img)
+		mlx_destroy_image(game->mlx, game->textures.south.img);
+	if (game->textures.east.img)
+		mlx_destroy_image(game->mlx, game->textures.east.img);
+	if (game->textures.west.img)
+		mlx_destroy_image(game->mlx, game->textures.west.img);
+	if (game->img.img)
+		mlx_destroy_image(game->mlx, game->img.img);
+	free_map_data(&game->map_data);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
 	exit(0);
 }
 
