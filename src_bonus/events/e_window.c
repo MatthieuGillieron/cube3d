@@ -6,11 +6,13 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:06:51 by mg                #+#    #+#             */
-/*   Updated: 2025/07/04 12:14:01 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 15:59:32 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
+#include <string.h>
+#include <sys/time.h>
 
 static void	get_facing_tile_coords(t_game *game, int *tx, int *ty)
 {
@@ -29,18 +31,52 @@ static void	get_facing_tile_coords(t_game *game, int *tx, int *ty)
 	*ty = py + dy;
 }
 
+double	get_time_seconds(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((double)tv.tv_sec + (double)tv.tv_usec / 1000000.0);
+}
+
+static void	register_open_door(t_game *game, int tx, int ty)
+{
+	if (game->open_door_count >= 32)
+		return ;
+	game->open_doors[game->open_door_count].x = tx;
+	game->open_doors[game->open_door_count].y = ty;
+	game->open_doors[game->open_door_count].open_time = get_time_seconds();
+	game->open_door_count++;
+}
+
+static int	is_door_already_opened(t_game *game, int tx, int ty)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->open_door_count)
+	{
+		if (game->open_doors[i].x == tx && game->open_doors[i].y == ty)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 static void	try_open_door(t_game *game)
 {
 	int	tx;
 	int	ty;
 
 	get_facing_tile_coords(game, &tx, &ty);
-	if (ty >= 0 && tx >= 0 && game->map[ty] && \
-		tx < (int)ft_strlen(game->map[ty]))
-	{
-		if (game->map[ty][tx] == 'D')
-			game->map[ty][tx] = '0';
-	}
+	if (ty < 0 || tx < 0 || !game->map[ty] || \
+		tx >= (int)ft_strlen(game->map[ty]))
+		return ;
+	if (game->map[ty][tx] != 'D')
+		return ;
+	game->map[ty][tx] = '0';
+	if (!is_door_already_opened(game, tx, ty))
+		register_open_door(game, tx, ty);
 }
 
 int	key_press(int keycode, t_game *game)

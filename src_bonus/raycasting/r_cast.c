@@ -6,11 +6,12 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:36:04 by mg                #+#    #+#             */
-/*   Updated: 2025/07/04 11:48:17 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 16:21:50 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
+#include <math.h>
 
 static void	set_dir_delta(t_ray_dir *dir)
 {
@@ -96,15 +97,27 @@ t_ray_hit	cast_ray(t_game *game, double ray_angle)
 	t_ray_pos	pos;
 	t_ray_dir	dir;
 	int			side;
+	double		dist;
 
 	init_ray_vars(game, ray_angle, &pos, &dir);
 	perform_dda(game, &pos, &dir, &side);
 	if (side == 0)
-		hit.distance = (pos.map_x - pos.pos_x
-				+ (1 - dir.step_x) / 2) / dir.ray_dir_x;
+	{
+		if (fabs(dir.ray_dir_x) < 1e-8)
+			dist = 1e30;
+		else
+			dist = (pos.map_x - pos.pos_x + (1 - dir.step_x) / 2) / dir.ray_dir_x;
+	}
 	else
-		hit.distance = (pos.map_y - pos.pos_y
-				+ (1 - dir.step_y) / 2) / dir.ray_dir_y;
+	{
+		if (fabs(dir.ray_dir_y) < 1e-8)
+			dist = 1e30;
+		else
+			dist = (pos.map_y - pos.pos_y + (1 - dir.step_y) / 2) / dir.ray_dir_y;
+	}
+	if (!isfinite(dist) || dist < 0.1)
+		dist = 0.1;
+	hit.distance = dist;
 	if (side == 0)
 		hit.wall_x = pos.pos_y + hit.distance * dir.ray_dir_y;
 	else

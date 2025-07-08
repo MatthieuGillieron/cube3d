@@ -6,7 +6,7 @@
 /*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:58:45 by maximemarti       #+#    #+#             */
-/*   Updated: 2025/07/04 12:20:57 by maximemarti      ###   ########.fr       */
+/*   Updated: 2025/07/04 16:00:57 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <math.h>
 # include <float.h>
 # include "../mlx/mlx.h"
+# include <sys/time.h>
 
 # define FOV 1.0472
 # define MOVE_SPEED 0.03
@@ -121,6 +122,12 @@ typedef struct s_key_state {
 	int	rotate_right;
 }	t_key_state;
 
+typedef struct s_open_door {
+	int		x;
+	int		y;
+	double	open_time;
+}	t_open_door;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -135,6 +142,8 @@ typedef struct s_game
 	t_textures	textures;
 	t_key_state	keys;
 	int			collision_active;
+	t_open_door	open_doors[32];
+	int			open_door_count;
 }	t_game;
 
 typedef struct s_ray_pos
@@ -300,5 +309,9 @@ void		print_player(t_player *player);
 void		print_map(char **map);
 void		print_color(t_color *col);
 void		print_texture(t_texture *tex);
+
+void		update_open_doors(t_game *game, double now);
+
+double		get_time_seconds(void);
 
 #endif

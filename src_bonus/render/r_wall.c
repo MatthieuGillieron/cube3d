@@ -3,25 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   r_wall.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: maximemartin <maximemartin@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:43:06 by mg                #+#    #+#             */
-/*   Updated: 2025/07/02 09:03:01 by mg               ###   ########.fr       */
+/*   Updated: 2025/07/04 16:15:28 by maximemarti      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cube3d.h"
+#include <math.h>
+
+static unsigned int	blend_shadow(unsigned int base, double f, double t)
+{
+	int	br;
+	int	bg;
+	int	bb;
+	int	r;
+	int	g;
+	int	b;
+	// Subtle animated blue tint
+	int	blue_tint = (int)(10 + 10 * sin(2 * M_PI * t));
+	br = (base >> 16) & 0xFF;
+	bg = (base >> 8) & 0xFF;
+	bb = base & 0xFF;
+	// Shadow: 1.0 at top, 0.5 at bottom
+	double shadow = 1.0 - 0.5 * f;
+	r = (int)(br * shadow);
+	g = (int)(bg * shadow);
+	b = (int)(bb * shadow + blue_tint * f);
+	if (r > 255) r = 255;
+	if (g > 255) g = 255;
+	if (b > 255) b = 255;
+	if (r < 0) r = 0;
+	if (g < 0) g = 0;
+	if (b < 0) b = 0;
+	return ((r << 16) | (g << 8) | b);
+}
 
 static void	draw_wall_column(t_game *game, t_img *texture, t_draw_params *dp)
 {
-	int		y;
-	int		tex_y;
-	double	step;
-	double	tex_pos;
-	char	*dst;
+	int			y;
+	int			tex_y;
+	double		step;
+	double		tex_pos;
+	char		*dst;
+	double		f;
+	unsigned int	base_color;
+	unsigned int	final_color;
+	double		t;
 
 	step = 1.0 * texture->height / dp->line_height;
 	tex_pos = (dp->draw_start - game->win_h / 2 + dp->line_height / 2) * step;
+	t = fmod(get_time_seconds(), 10.0) / 10.0;
 	y = dp->draw_start;
 	while (y <= dp->draw_end)
 	{
@@ -29,7 +62,10 @@ static void	draw_wall_column(t_game *game, t_img *texture, t_draw_params *dp)
 		tex_pos += step;
 		dst = game->img.addr
 			+ (y * game->img.line_len + dp->x * (game->img.bpp / 8));
-		*(unsigned int *)dst = get_texture_color(texture, dp->tex_x, tex_y);
+		base_color = get_texture_color(texture, dp->tex_x, tex_y);
+		f = (dp->line_height > 1) ? (double)(y - dp->draw_start) / (dp->line_height - 1) : 0.0;
+		final_color = blend_shadow(base_color, f, t);
+		*(unsigned int *)dst = final_color;
 		y++;
 	}
 }
